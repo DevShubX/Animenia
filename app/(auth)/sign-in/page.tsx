@@ -1,14 +1,17 @@
 import Link from 'next/link'
-import React from 'react'
-import { AiOutlineEyeInvisible } from 'react-icons/ai'
+import React, { useState } from 'react'
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 import { GoUnlock } from 'react-icons/go'
 import { HiOutlineMail } from 'react-icons/hi'
 
 const SignInPage = () => {
+
+  //font-[family-name:var(--font-gilroy-bold)]
+
   return (
     <div className='card w-full px-[4rem] py-[2rem] rounded-[20px] shadow-lg max-w-md flex flex-col items-center'>
-      <h1 className='text-center font-medium text-4xl mb-6'>Login</h1>
+      <h1 className='text-center text-4xl mb-6'>Login</h1>
       <div className='space-y-4 w-full'>
         <div className='bg-white w-full flex items-center p-2 border rounded-lg '>
           <span>
@@ -18,7 +21,7 @@ const SignInPage = () => {
             type="email"
             name="email"
             placeholder="Email"
-            className='w-full p-2 outline-none'/>
+            className='w-full p-2 outline-none' />
         </div>
         <div className='bg-white flex items-center p-2 border rounded-lg'>
           <span>
@@ -28,9 +31,9 @@ const SignInPage = () => {
             type="password"
             name="password"
             placeholder="Password"
-            className='w-full p-2  outline-none'/>
+            className='w-full p-2 outline-none' />
           <span>
-            <AiOutlineEyeInvisible className='w-6 h-6 text-gray-400'/>
+            <AiOutlineEyeInvisible className='w-6 h-6 text-gray-400' />
           </span>
         </div>
       </div>
@@ -41,7 +44,7 @@ const SignInPage = () => {
         Login
       </button>
       <span className='mt-2 mb-4'>
-        Don't have an account? 
+        Don&apos;t have an account?
         <Link href={"/sign-up"} className=' ml-2 underline font-medium'>
           Register
         </Link>

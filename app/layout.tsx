@@ -2,16 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Animenia",
@@ -26,10 +16,38 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        className={`
+          ${gilroyMedium.variable}
+          ${gilroyBold.variable}
+          ${gilroyRegular.variable}
+          ${gilroyLight.variable}
+          ${gilroyHeavy.variable}
+          antialiased`}
+          >
         {children}
       </body>
     </html>
   );
 }
+
+
+const gilroyMedium = localFont({
+  src: "./fonts/Gilroy-Medium.ttf",
+  variable: "--font-gilroy-medium",
+});
+const gilroyBold = localFont({
+  src: "./fonts/Gilroy-Bold.ttf",
+  variable: "--font-gilroy-bold",
+});
+const gilroyRegular = localFont({
+  src: "./fonts/Gilroy-Regular.ttf",
+  variable: "--font-gilroy-regular",
+});
+const gilroyLight = localFont({
+  src: "./fonts/Gilroy-Light.ttf",
+  variable: "--font-gilroy-light",
+});
+const gilroyHeavy = localFont({
+  src: "./fonts/Gilroy-Heavy.ttf",
+  variable: "--font-gilroy-heavy",
+});
