@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import ContextProvider from "@/GlobalContext/ContextProvider";
+import { Toaster } from "react-hot-toast";
 
 
 export const metadata: Metadata = {
@@ -23,8 +25,11 @@ export default function RootLayout({
           ${gilroyLight.variable}
           ${gilroyHeavy.variable}
           antialiased`}
-          >
-        {children}
+      >
+        <ContextProvider>
+          <Toaster/>
+          {children}
+        </ContextProvider>
       </body>
     </html>
   );
