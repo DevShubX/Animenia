@@ -9,15 +9,60 @@ import { HiOutlineMail } from "react-icons/hi";
 import { TbCameraPlus } from "react-icons/tb";
 import Image from 'next/image'
 import { MdDelete } from "react-icons/md";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
+import { auth } from "@/firebase/firebase";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { uploadImageToFirebase } from "@/lib/firebaseMethods";
+import { Download, Loader2 } from "lucide-react";
 
 const SignUpPage = () => {
 
+  const router = useRouter();
   const [photoUrl, setPhotoUrl] = useState<any>(null);
   const [selectedPhoto, setSelectedPhoto] = useState<any>("");
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [isSignInWithGoogle, setIsSignInWithGoogle] = useState<boolean>(false)
+  const [isLoading , setIsLoading] = useState<boolean>(false)
+
+  const handleSignUp = async () => {
+    if(email && password){
+      setIsLoading(true)
+      const user = await createUserWithEmailAndPassword(auth,email,password);
+      await uploadImageToFirebase(selectedPhoto).then(async (imageURL) => {
+        console.log("Sign up imageURL",imageURL)
+        if(name && imageURL){
+          await updateProfile(user.user,{
+            displayName: name,
+            photoURL: imageURL
+          }).then(() => {
+            router.replace('/')
+          }).finally(() => {
+            setIsLoading(false)
+          })
+        }
+        setIsLoading(false)
+      })
+    }
+  }
+
+  const onGoogleSignIn = () => {
+   setIsSignInWithGoogle(true);
+   const googleProvider = new GoogleAuthProvider();
+   const promise = signInWithPopup(auth, googleProvider);
+   toast.promise(promise, {
+    loading: "Signing in with google",
+    success: "Login Succesfull",
+    error: "Error signing in with google.😞"
+   }).then(()=>{
+    router.push('/');
+   }).finally(() => {
+    setIsSignInWithGoogle(false);
+   })
+  }
   
   useEffect(() => {
     if(selectedPhoto){
@@ -109,8 +154,20 @@ const SignUpPage = () => {
           </span>
         </div>
       </div>
-      <button className="bg-red-600 w-full p-3 rounded-lg my-4 text-white text-[19px] font-[family-name:var(--font-gilroy-medium)]">
-        Register
+      <button 
+        onClick={handleSignUp}
+        disabled={isLoading}
+        className="bg-red-600 w-full p-3 rounded-lg my-4 text-white text-[19px] font-[family-name:var(--font-gilroy-medium)]">
+        {isLoading ? (
+          <div className="flex items-center justify-center gap-x-2">
+            <Loader2 className="animate-spin"/>
+            <span>Loading...</span>
+          </div>
+        ) : (
+          <>
+            Register
+          </>
+        )}
       </button>
       <span className="mt-2 mb-4 font-[family-name:var(--font-gilroy-medium)]">
         Already have an account?
@@ -121,7 +178,10 @@ const SignUpPage = () => {
           Login
         </Link>
       </span>
-      <button className="flex items-center w-full bg-white p-3 justify-center space-x-2 mt-4 rounded-lg font-[family-name:var(--font-gilroy-medium)]">
+      <button 
+        onClick={onGoogleSignIn}
+        disabled={isSignInWithGoogle}
+        className="flex items-center w-full bg-white p-3 justify-center space-x-2 mt-4 rounded-lg font-[family-name:var(--font-gilroy-medium)]">
         <FcGoogle className="w-8 h-8" />
         <span className="text-[17px]">Sign in with Google</span>
       </button>

@@ -107,9 +107,9 @@ const SignInPage = () => {
             <span>Loading...</span>
           </div>
         ) : (
-          <div>
+          <>
             Login
-          </div>
+          </>
         )}
 
       </button>
