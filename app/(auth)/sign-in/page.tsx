@@ -12,6 +12,9 @@ const SignInPage = () => {
   const[password , setPassword] = useState<string>('')
   const[isPasswordVisible , setIsPasswordVisible] = useState<boolean>(false)
 
+
+
+
   return (
     <div className='card w-full px-[4rem] py-[2rem] max-md:px-[2rem] max-md:mx-[1rem] rounded-[20px] shadow-lg max-w-md flex flex-col items-center '>
       <h1 className='text-center text-4xl mb-6 font-[family-name:var(--font-gilroy-bold)]'>Login</h1>

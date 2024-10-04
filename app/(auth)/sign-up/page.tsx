@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -27,7 +27,7 @@ const SignUpPage = () => {
 
   return (
     <div className="card w-full px-[4rem] py-[2rem] max-md:px-[2rem] max-md:mx-[1rem] rounded-[20px] shadow-lg max-w-md flex flex-col items-center ">
-      <h1 className="text-center text-4xl mb-6 font-[family-name:var(--font-gilroy-bold)]">
+      <h1 className="text-center text-4xl mb-3 font-[family-name:var(--font-gilroy-bold)]">
         Register
       </h1>
       <div className="space-y-4 w-full">
@@ -38,7 +38,6 @@ const SignUpPage = () => {
           className="hidden"
           onChange={(e: any) => {
             setSelectedPhoto(e.target.files[0])
-            // setPhotoUrl(URL.createObjectURL(e.target.files[0]));
           }}
         />
         <label htmlFor='profileImage' className="relative flex justify-center items-center w-full">
