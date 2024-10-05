@@ -26,49 +26,51 @@ const SignUpPage = () => {
   const [password, setPassword] = useState<string>("");
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [isSignInWithGoogle, setIsSignInWithGoogle] = useState<boolean>(false)
-  const [isLoading , setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const handleSignUp = async () => {
-    if(email && password){
-      setIsLoading(true)
-      const user = await createUserWithEmailAndPassword(auth,email,password);
-      await uploadImageToFirebase(selectedPhoto).then(async (imageURL) => {
-        console.log("Sign up imageURL",imageURL)
-        if(name && imageURL){
-          await updateProfile(user.user,{
+    try {
+      if (email && password) {
+        setIsLoading(true);
+        const user = await createUserWithEmailAndPassword(auth, email, password);
+        const photoURL = await uploadImageToFirebase(selectedPhoto);
+        if (name && photoURL) {
+          await updateProfile(user.user, {
             displayName: name,
-            photoURL: imageURL
+            photoURL: photoURL,
           }).then(() => {
-            router.replace('/')
-          }).finally(() => {
-            setIsLoading(false)
-          })
+            router.replace('/');
+            toast.success("Register Successfull, Welcome!");
+          });
         }
-        setIsLoading(false)
-      })
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
     }
   }
 
   const onGoogleSignIn = () => {
-   setIsSignInWithGoogle(true);
-   const googleProvider = new GoogleAuthProvider();
-   const promise = signInWithPopup(auth, googleProvider);
-   toast.promise(promise, {
-    loading: "Signing in with google",
-    success: "Login Succesfull",
-    error: "Error signing in with google.😞"
-   }).then(()=>{
-    router.push('/');
-   }).finally(() => {
-    setIsSignInWithGoogle(false);
-   })
+    setIsSignInWithGoogle(true);
+    const googleProvider = new GoogleAuthProvider();
+    const promise = signInWithPopup(auth, googleProvider);
+    toast.promise(promise, {
+      loading: "Signing in with google",
+      success: "Login Succesfull",
+      error: "Error signing in with google.😞"
+    }).then(() => {
+      router.push('/');
+    }).finally(() => {
+      setIsSignInWithGoogle(false);
+    })
   }
-  
+
   useEffect(() => {
-    if(selectedPhoto){
+    if (selectedPhoto) {
       setPhotoUrl(URL.createObjectURL(selectedPhoto))
     }
-  },[selectedPhoto])
+  }, [selectedPhoto])
 
   return (
     <div className="card w-full px-[4rem] py-[2rem] max-md:px-[2rem] max-md:mx-[1rem] rounded-[20px] shadow-lg max-w-md flex flex-col items-center ">
@@ -93,8 +95,8 @@ const SignUpPage = () => {
           )}
           {photoUrl && selectedPhoto && (
             <div className="relative flex justify-center items-center w-[100px] h-[100px] rounded-[50%] cursor-pointer">
-              <Image src={photoUrl} alt="pfp" width={100} height={100} className="w-[100px] h-[100px] rounded-[50%] object-cover"/>
-              <button 
+              <Image src={photoUrl} alt="pfp" width={100} height={100} className="w-[100px] h-[100px] rounded-[50%] object-cover" />
+              <button
                 className="absolute bottom-0 right-0 outline-none rounded-[50%] p-1 bg-slate-200"
                 onClick={() => {
                   setPhotoUrl(null)
@@ -154,13 +156,13 @@ const SignUpPage = () => {
           </span>
         </div>
       </div>
-      <button 
+      <button
         onClick={handleSignUp}
         disabled={isLoading}
         className="bg-red-600 w-full p-3 rounded-lg my-4 text-white text-[19px] font-[family-name:var(--font-gilroy-medium)]">
         {isLoading ? (
           <div className="flex items-center justify-center gap-x-2">
-            <Loader2 className="animate-spin"/>
+            <Loader2 className="animate-spin" />
             <span>Loading...</span>
           </div>
         ) : (
@@ -178,7 +180,7 @@ const SignUpPage = () => {
           Login
         </Link>
       </span>
-      <button 
+      <button
         onClick={onGoogleSignIn}
         disabled={isSignInWithGoogle}
         className="flex items-center w-full bg-white p-3 justify-center space-x-2 mt-4 rounded-lg font-[family-name:var(--font-gilroy-medium)]">
