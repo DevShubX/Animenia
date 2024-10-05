@@ -14,7 +14,7 @@ import { auth } from "@/firebase/firebase";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { uploadImageToFirebase } from "@/lib/firebaseMethods";
-import { Download, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 const SignUpPage = () => {
 
@@ -50,6 +50,7 @@ const SignUpPage = () => {
       setIsLoading(false);
     }
   }
+
 
   const onGoogleSignIn = () => {
     setIsSignInWithGoogle(true);
