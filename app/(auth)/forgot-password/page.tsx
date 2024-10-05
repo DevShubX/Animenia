@@ -21,9 +21,9 @@ const ForgotPasswordPage = () => {
         toast.success("Reset Email Send Succesfully");
     });
     }catch(err){
-        toast.error("Something Went Wrong")
+        toast.error("Something Went Wrong");
     }finally{
-        setIsLoading(false)
+        setIsLoading(false);
     }
   };
 

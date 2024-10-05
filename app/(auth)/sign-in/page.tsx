@@ -25,18 +25,22 @@ const SignInPage = () => {
 
 
   const handleLogIn = () => {
-    if (email && password) {
-      setIsSigningIn(true);
-      const signInPromise = signInWithEmailAndPassword(auth, email, password);
-      toast.promise(signInPromise, {
-        loading: "Signing in...",
-        success: "Login Successfull",
-        error: "Error signing in...😞",
-      }).then(() => {
-        router.push('/');
-      }).finally(() => {
-        setIsSigningIn(false);
-      });
+    try{
+      if (email && password) {
+        setIsSigningIn(true);
+        const signInPromise = signInWithEmailAndPassword(auth, email, password);
+        toast.promise(signInPromise, {
+          loading: "Signing in...",
+          success: "Login Successfull",
+          error: "Error signing in...😞",
+        }).then(() => {
+          router.push('/');
+        }).finally(() => {
+          setIsSigningIn(false);
+        });
+      }
+    }catch(error){
+      toast.error("Something went wrong!");
     }
   }
 
@@ -91,11 +95,10 @@ const SignInPage = () => {
           </span>
         </div>
       </div>
-      <div className='w-full text-start'>
-        <button
-          className='text-gray-600 mb-5 mt-1 text-[15px] font-[family-name:var(--font-gilroy-medium)]'>
+      <div className='w-full text-start mb-3 mt-1'>
+        <Link href={'/forgot-password'} className='text-gray-600 text-[15px] font-[family-name:var(--font-gilroy-medium)]'>
           Forgot password
-        </button>
+        </Link>
       </div>
       <button
         onClick={handleLogIn}

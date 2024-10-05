@@ -2,7 +2,7 @@
 import { auth } from "@/firebase/firebase";
 import { signOut } from "firebase/auth";
 
-export default function Home() {
+export default function Homepage() {
 
   const onSignOut = async() =>{
     await signOut(auth);
