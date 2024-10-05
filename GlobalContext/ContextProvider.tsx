@@ -26,13 +26,13 @@ const ContextProvider = ({children}:{children:React.ReactNode}) => {
         onAuthStateChanged(auth,(user)=>{
             setCurrentUser(user);
             if(user){
-                if(pathname.includes('/sign-in') || pathname.includes('/sign-up')){
+                if(pathname.includes('/sign-in') || pathname.includes('/sign-up') || pathname.includes('/forgot-password')){
                     router.replace('/');
                 }else{
                     return;
                 }
             }else{
-                if(pathname.includes('/sign-in') || pathname.includes('/sign-up')){
+                if(pathname.includes('/sign-in') || pathname.includes('/sign-up') || pathname.includes('/forgot-password')){
                     return;
                 }else{
                     router.replace('/sign-in');
