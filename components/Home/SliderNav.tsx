@@ -10,7 +10,7 @@ interface SliderNavProps{
 
 const SliderNav = ({title , href}:SliderNavProps) => {
   return (
-    <div className="bg-white mt-5 p-4 rounded-lg flex items-center justify-between">
+    <div className="bg-white mt-5 p-4 rounded-lg flex items-center justify-between w-full">
         <div className="flex items-center space-x-2">
           <div className="bg-red-600 flex items-center p-2 rounded-lg">
             <Image className="text-white w-6 h-6" />

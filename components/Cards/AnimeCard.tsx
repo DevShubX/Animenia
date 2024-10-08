@@ -7,14 +7,17 @@ interface AnimeCardProps{
 
 const AnimeCard = ({detail}:AnimeCardProps) => {
   return (
-    <div className='w-full h-full'>
-        <img
+    <div className='flex-shrink-0 relative'>
+        <Image
             src={detail.coverImage.large} 
-            alt="img" 
-            // width={800} 
-            // height={800}
-            // className=' w-[200px] h-[400px]'
+            width={400}
+            height={400}
+            alt="img"
+            className='w-[210px] h-[300px] object-cover' 
         />
+        <div className='absolute bottom-0 left-0'>
+          {detail.title.romaji}
+        </div>
     </div>
   )
 }

@@ -9,7 +9,7 @@ export default function Homepage() {
   }
 
   return (
-    <div>
+    <div className="w-full">
       <PopularAnimeSlider />
 
       {/* <button onClick={onSignOut}>

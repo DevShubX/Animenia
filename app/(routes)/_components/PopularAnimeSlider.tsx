@@ -4,14 +4,17 @@ import SliderNav from "@/components/Home/SliderNav";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+
 const PopularAnimeSlider = () => {
 
-    const [popularAnime , setPopularAnime] = useState<any[]>([]);
-    const [isLoading , setIsLoading] = useState<boolean>(false);
+    const [popularAnime, setPopularAnime] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    useEffect(()=> {
+    useEffect(() => {
         getPopularAnime()
-    },[])
+    }, [])
 
     const getPopularAnime = async () => {
         setIsLoading(true)
@@ -20,19 +23,46 @@ const PopularAnimeSlider = () => {
         setIsLoading(false)
     }
 
-  return (
-    <div className="max-lg:mx-[50px] mx-[200px] w-full h-full">
-        <SliderNav 
-            title= "Popular Anime" 
-            href= "/popular"
-        />
-        <div className="flex gap-x-2 w-full h-full">
-            {popularAnime.map((item) => (
-                <AnimeCard detail={item}/>
-            ))}
+    return (
+        <div className="max-sm:mx-5 max-lg:mx-[50px] lg:mx-[200px]">
+            <SliderNav
+                title="Popular Anime"
+                href="/popular"
+            />
+            <div className="w-full p-5">
+                <Swiper
+                    className="MySwiper"
+                    breakpoints={{
+                        // when window width is >= 320px
+                        320: {
+                          slidesPerView: 2,
+                          spaceBetween: 20
+                        },
+                        // when window width is >= 480px
+                        480: {
+                          slidesPerView: 3,
+                          spaceBetween: 30
+                        },
+                        // when window width is >= 640px
+                        640: {
+                          slidesPerView: 4,
+                          spaceBetween: 40
+                        },
+                        1500 : {
+                            slidesPerView : 6,
+                            spaceBetween : 40,
+                        }
+                      }}
+                >
+                    {popularAnime.map((item: any, index: any) => (
+                        <SwiperSlide key={item.id}>
+                            <AnimeCard detail={item} />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
         </div>
-    </div>
-  );
+    );
 };
 
 export default PopularAnimeSlider;
