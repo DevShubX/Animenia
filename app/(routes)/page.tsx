@@ -1,6 +1,6 @@
-'use client'
 import { auth } from "@/firebase/firebase";
 import { signOut } from "firebase/auth";
+import PopularAnimeSlider from "./_components/PopularAnimeSlider";
 
 export default function Homepage() {
 
@@ -10,11 +10,11 @@ export default function Homepage() {
 
   return (
     <div>
-      HomePage
+      <PopularAnimeSlider />
 
-      <button onClick={onSignOut}>
+      {/* <button onClick={onSignOut}>
         Sign out
-      </button>
+      </button> */}
     </div>
   );
 }
