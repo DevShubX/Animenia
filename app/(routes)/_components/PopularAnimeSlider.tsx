@@ -49,7 +49,7 @@ const PopularAnimeSlider = () => {
                           spaceBetween: 40
                         },
                         1500 : {
-                            slidesPerView : 6,
+                            slidesPerView : 5,
                             spaceBetween : 40,
                         }
                       }}

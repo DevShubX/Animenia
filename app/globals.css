@@ -15,6 +15,14 @@ body,
     background-color: rgba(240, 243, 248, 0.76);
 }
 
+.animecard {
+    backdrop-filter: blur(6px) saturate(180%);
+    -webkit-backdrop-filter: blur(6px) saturate(180%);
+    background-color: rgba(239, 241, 245, 0.7);
+    border-radius: 0 0 20px 20px;
+    overflow: hidden;
+}
+
 
 /* Hide the scrollbar track */
 ::-webkit-scrollbar-track {
