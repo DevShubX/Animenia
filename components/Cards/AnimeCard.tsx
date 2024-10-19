@@ -18,7 +18,7 @@ const AnimeCard = ({detail}:AnimeCardProps) => {
         />
         <div className='absolute bottom-0 w-full pb-3 pt-3 animecard'>
           <div className=' pl-6 mb-2 left-0 truncate text-xl text-red-500 font-[family-name:var(--font-gilroy-bold)] max-sm:pl-2 max-sm:text-[18px]'>
-            {detail.title.romaji ?? detail.title.english ?? detail.title.native ?? detail.titile.userPreferred}
+            {detail.title.romaji ?? detail.title.english ?? detail.title.native ?? detail.title.userPreferred}
           </div>
           <div className='flex items-center pl-4 truncate font-[family-name:var(--font-gilroy-medium)] max-sm:hidden'>
             {detail.genres.slice(0,3).map((item:string) => (

@@ -156,7 +156,6 @@ export const favouritesAnimeQuery = `
 	}
 `;
 
-
 export const animeReviewsQuery = `
 	query($perPage:Int,$page:Int,$type:MediaType){
 		Page(page: $page, perPage: $perPage){
@@ -190,7 +189,7 @@ export const animeReviewsQuery = `
 		}
 	}
 	
-`
+`;
 export const searchAnimeQuery = `
 		query ($search: String) {
 			Media(search: $search, type: ANIME, sort: POPULARITY_DESC) {
@@ -405,5 +404,33 @@ export const searchAnimeQuery = `
 				site
 			  }
 			}
-		}`
-;
+		}`;
+
+export const releaseingAnimeQuery = `
+		query Media($status: MediaStatus) {
+		Page {
+			media(status: $status) {
+			title {
+				english
+				romaji
+				native
+				userPreferred
+			}
+			coverImage {
+				color
+				extraLarge
+				large
+				medium
+			}
+			status
+			genres
+			nextAiringEpisode {
+				timeUntilAiring
+				airingAt
+				episode
+			}
+			description
+			}
+		}
+	}
+`;
