@@ -46,18 +46,21 @@ const Navbar = () => {
       </div>
       <div className="relative flex items-center justify-center space-x-3">
         {isSearchOpen && (
-          <input
-            type="text"
-            placeholder="Search..."
-            className="absolute top-[] right-[160px] font-[family-name:var(--font-gilroy-medium)] p-1 pl-3 rounded-[5px] outline-none bg-gray-100 "
-            value={searchState}
-            onChange={(e) => setSearchState(e.target.value)}
-            onKeyDown={(e) => {
-              if(e.key === 'Enter'){
-                handleSubmit(searchState)
-              }
-            }}
-          />
+          <div className="flex absolute top-[] right-[160px] bg-gray-100 font-[family-name:var(--font-gilroy-medium)] p-2 rounded-[5px] space-x-2 ">
+            <Search className="text-gray-500"/>
+            <input
+              type="text"
+              placeholder="Search..."
+              className="bg-gray-100  outline-none  "
+              value={searchState}
+              onChange={(e) => setSearchState(e.target.value)}
+              onKeyDown={(e) => {
+                if(e.key === 'Enter'){
+                  handleSubmit(searchState)
+                }
+              }}
+            />
+          </div>
         )}
         <div onClick={() => setIsSearchOpen(!isSearchOpen)} className="cursor-pointer ">
           {isSearchOpen ? <X className="text-red-500 w-8 h-8" />: <Search />}

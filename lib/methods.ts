@@ -1,3 +1,6 @@
+import clsx, { ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
 export const timeUntilAiring = (seconds:any) =>{
     const days = Math.floor(seconds / (3600 * 24));
     const hours = Math.floor((seconds % (3600 * 24)) / 3600);
@@ -15,3 +18,7 @@ export const timeUntilAiring = (seconds:any) =>{
     return result;
   
 }
+
+export function cn(...inputs:ClassValue[]){
+    return twMerge(clsx(inputs))
+} 

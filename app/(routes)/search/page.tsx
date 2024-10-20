@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -31,7 +32,7 @@ const SearchPage = () => {
       ) : (
         <div className="grid grid-cols-7 gap-y-5 mt-5 max-2xl:grid-cols-6 max-xl:grid-cols-5 max-lg:grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-2">
           {searchResult.map((item) => (
-            <div>
+            <Link href={`/details/${item.animeId}`}>
               <Image
                 className="h-[300px] rounded-[10px] object-cover max-md:h-[210px] max-md:w-[160px]"
                 src={item.image}
@@ -42,7 +43,7 @@ const SearchPage = () => {
               <div className="font-[family-name:var(--font-gilroy-medium)] text-xl mt-2 max-w-[200px] truncate">
                 {item.title}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
