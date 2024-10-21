@@ -3,8 +3,7 @@ import AnimeDetails from './_components/AnimeDetails'
 import axios from 'axios'
 
 const AnimeDetailsPage = async ({params}:{params:{animeId:string}}) => {
-    const response = await axios.get(`http://localhost:3000/api/animeDetails?id=${params.animeId}`)
-    // console.log(response.data)    
+    const response = await axios.get(`http://localhost:3000/api/animeDetails?id=${params.animeId}`) 
 
   return (
     <div>
