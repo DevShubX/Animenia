@@ -1,4 +1,4 @@
-import { favouritesAnimeQuery } from "@/lib/aniListQueries";
+import { releaseingAnimeQuery } from "@/lib/aniListQueries";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -6,9 +6,8 @@ const baseUrl = "https://graphql.anilist.co";
 
 export async function GET(req: NextRequest) {
   try {
-    const page = req.nextUrl.searchParams.get("page")!;
-    const count = req.nextUrl.searchParams.get("count")!;
-    const response:any = await axios({
+    const status = req.nextUrl.searchParams.get("status")!;
+    const response: any = await axios({
       url: baseUrl,
       method: "POST",
       headers: {
@@ -16,16 +15,15 @@ export async function GET(req: NextRequest) {
         Accept: "application/json",
       },
       data: {
-        query: favouritesAnimeQuery,
+        query: releaseingAnimeQuery,
         variables: {
-          page: page === undefined ? 1 : page,
-          perPage: count === undefined ? 10 : count,
+          status: status === undefined ? null : status,
         },
       },
     }).catch((err) => {
       return NextResponse.json(
         {
-          msg: "Error fetching favorite anime",
+          msg: "Error fetching releasing Anime",
           err,
         },
         {
@@ -53,10 +51,10 @@ export async function GET(req: NextRequest) {
       }
     );
   } catch (err) {
-    console.log("Error from Favorite Anime Route", err);
+    console.log("Error from Releasing Anime Route", err);
     return NextResponse.json(
       {
-        msg: "Error from Favorite Anime Route",
+        msg: "Error from Releasing Anime Route",
       },
       {
         status: 500,

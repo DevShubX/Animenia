@@ -1,4 +1,4 @@
-import { favouritesAnimeQuery } from "@/lib/aniListQueries";
+import { animeReviewsQuery } from "@/lib/aniListQueries";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -8,6 +8,7 @@ export async function GET(req: NextRequest) {
   try {
     const page = req.nextUrl.searchParams.get("page")!;
     const count = req.nextUrl.searchParams.get("count")!;
+    const type = req.nextUrl.searchParams.get("type")!;
     const response:any = await axios({
       url: baseUrl,
       method: "POST",
@@ -16,16 +17,17 @@ export async function GET(req: NextRequest) {
         Accept: "application/json",
       },
       data: {
-        query: favouritesAnimeQuery,
+        query: animeReviewsQuery,
         variables: {
           page: page === undefined ? 1 : page,
           perPage: count === undefined ? 10 : count,
+          type: type === undefined ? null : type,
         },
       },
     }).catch((err) => {
       return NextResponse.json(
         {
-          msg: "Error fetching favorite anime",
+          msg: "Error fetching review of anime",
           err,
         },
         {
@@ -53,10 +55,10 @@ export async function GET(req: NextRequest) {
       }
     );
   } catch (err) {
-    console.log("Error from Favorite Anime Route", err);
+    console.log("Error from Review of Anime Route", err);
     return NextResponse.json(
       {
-        msg: "Error from Favorite Anime Route",
+        msg: "Error from Review of Anime Route",
       },
       {
         status: 500,

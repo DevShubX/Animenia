@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import SliderSkeleton from "@/components/Skeletons/SliderSkeleton";
+import { Image } from "lucide-react";
 
 const PopularAnimeSlider = () => {
   const [popularAnime, setPopularAnime] = useState<any[]>([]);
@@ -24,8 +25,8 @@ const PopularAnimeSlider = () => {
   };
 
   return (
-    <div className="max-sm:mx-5 max-lg:mx-[50px] lg:mx-[200px]">
-      <SliderNav title="Popular Anime" href="/popular" />
+    <div>
+      <SliderNav icon= {Image} title="Popular Anime" href="/popular" />
       {isLoading && <SliderSkeleton />}
       {!isLoading && (
         <div className="w-full p-5 max-sm:px-2">
@@ -39,17 +40,21 @@ const PopularAnimeSlider = () => {
               },
               // when window width is >= 480px
               480: {
-                slidesPerView: 4,
+                slidesPerView: 3,
                 spaceBetween: 30,
               },
               // when window width is >= 640px
               640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              900: {
                 slidesPerView: 3,
-                spaceBetween: 40,
+                spaceBetween: 30,
               },
               1500: {
-                slidesPerView: 5,
-                spaceBetween: 40,
+                slidesPerView: 4,
+                spaceBetween: 45,
               },
             }}
           >
