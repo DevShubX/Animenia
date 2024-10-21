@@ -56,7 +56,7 @@ const FavoriteAnimeSlider = () => {
                         spaceBetween: 30,
                       },
                       1500: {
-                        slidesPerView: 4,
+                        slidesPerView: 5,
                         spaceBetween: 45,
                       },
                     }}

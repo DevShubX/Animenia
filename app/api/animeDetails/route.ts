@@ -99,6 +99,7 @@ export async function GET(req: NextRequest) {
           anifyData = {};
         });
     }
+    const jikanResponse = await axios.get(`https://api.jikan.moe/v4/anime/${anilistResponse?.data?.data?.Media?.idMal}/reviews`)
 
     let gogoResponse = {
       title,
@@ -134,6 +135,7 @@ export async function GET(req: NextRequest) {
         animeEpisodes: episodes,
         mappings: anifyData?.mappings,
         kitsuId: kitsuId,
+        malReviews: jikanResponse.data.data,
         ...anilistData,
       };
       result = {
