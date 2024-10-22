@@ -23,8 +23,8 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
   console.log(anilistData.malReviews);
 
   return (
-    <div className="p-6 flex flex-shrink-0 w-screen gap-x-5">
-      <div className="w-[85%]">
+    <div className="p-6 max-md:p-3 flex flex-shrink-0 gap-x-5 max-lg:block">
+      <div className="w-[85%] max-lg:w-full">
         <div className="bg-white mt-5 p-4 rounded-lg flex items-center justify-between ">
           <div className="flex items-center space-x-2">
             <div className="bg-red-600 flex items-center p-2 rounded-lg">
@@ -39,8 +39,8 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
             <ChevronDown />
           </div>
         </div>
-        <div className="flex mt-3 gap-x-5">
-          <div className="flex flex-col w-[250px]">
+        <div className="flex mt-3 gap-x-5 max-md:flex-col">
+          <div className="flex flex-col w-[250px] max-md:w-full max-md:items-center">
             <Image
               src={anilistData.coverImage.large}
               alt="img"
@@ -51,13 +51,13 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
             <Link
               href={`https://www.youtube.com/watch?v=${anilistData.trailer?.id}`}
               target="_blank"
-              className="w-[250px] flex items-center justify-center gap-x-2 mt-3 bg-black text-white text-[18px] p-4 rounded-[10px] font-[family-name:var(--font-gilroy-bold)]"
+              className=" w-[250px] flex items-center justify-center gap-x-2 mt-3 bg-black text-white text-[18px] p-4 rounded-[10px] font-[family-name:var(--font-gilroy-bold)]"
             >
               <FaYoutube className="text-red-600 w-8 h-8" />
               <div>Watch Trailer</div>
             </Link>
           </div>
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start max-md:mt-3">
             <div className="text-red-600 text-3xl font-[family-name:var(--font-gilroy-bold)]">
               {anilistData.title.romaji ?? anilistData.title.userPreferred}
             </div>
@@ -95,11 +95,11 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
           <div className="text-2xl text-red-600 font-[family-name:var(--font-gilroy-bold)] mt-6 ">
             Episodes
           </div>
-          <div className="grid grid-cols-7 gap-4 mt-2 max-h-[270px] overflow-y-scroll">
+          <div className="grid grid-cols-7 gap-4 max-lg:grid-cols-6 max-md:grid-cols-4 max-sm:grid-cols-3 mt-2 max-h-[270px] overflow-y-scroll">
             {anilistData.animeEpisodes.map((item: any, index: number) => (
               <Link
                 href={""}
-                className="bg-white p-2 hover:bg-red-100 font-[family-name:var(--font-gilroy-medium)] rounded-md"
+                className="bg-white whitespace-nowrap p-2 hover:bg-red-100 font-[family-name:var(--font-gilroy-medium)] rounded-md"
               >
                 Episode {index + 1}
               </Link>
@@ -125,6 +125,27 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
                   {item.node.name.full ?? item.node.name.userPreferred}
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <div className="text-2xl text-red-600 font-[family-name:var(--font-gilroy-bold)] mt-6 ">
+            Recommendations
+          </div>
+          <div className="flex overflow-scroll gap-x-5 mt-2">
+            {anilistData.recommendations.edges.map((item: any) => (
+              <Link href={`/search?q=${item.node.mediaRecommendation.title.romaji ?? item.node.mediaRecommendation.title.userpreferred}`} className="flex-shrink-0 w-[160px]">
+                <Image
+                  src={item.node.mediaRecommendation.coverImage.large}
+                  alt="image"
+                  width={200}
+                  height={200}
+                  className="w-[160px] h-[235px] rounded-md"
+                />
+                <div className="text-red-400 truncate font-[family-name:var(--font-gilroy-bold)]">
+                  {item.node.mediaRecommendation.title.romaji ?? item.node.mediaRecommendation.title.userpreferred}
+                </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -165,7 +186,11 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
           <SliderNav icon={ScrollText} title="Review" />
           <div className="flex flex-col gap-y-3 mt-4">
             {anilistData.malReviews.slice(0, 5).map((item: any) => (
-              <Link href={item.url} target="_blank" className="w-full bg-white cursor-pointer rounded-md p-2 font-[family-name:var(--font-gilroy-medium)]">
+              <Link
+                href={item.url}
+                target="_blank"
+                className="w-full bg-white cursor-pointer rounded-md p-2 font-[family-name:var(--font-gilroy-medium)]"
+              >
                 <div className="flex items-center gap-x-3">
                   <Image
                     src={
@@ -179,9 +204,7 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
                   />
                   <div>{item.user.username}</div>
                 </div>
-                <div className="mt-2">
-                  {item.review.substring(0, 50)}
-                </div>
+                <div className="mt-2">{item.review.substring(0, 50)}</div>
               </Link>
             ))}
           </div>
