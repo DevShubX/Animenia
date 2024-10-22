@@ -57,13 +57,13 @@ export async function GET(req:NextRequest){
         })
 
         let numOfEpisodes:number = parseInt($("#episode_page li:last-child a").attr("ep_end")!)
-        let baseEpisodeLink = episodeId.replace("/\d+$/","")
+        let baseEpisodeLink = epiId.replace(/\d+$/,"")
         let episodes = []
         for (let i = 1; i <= numOfEpisodes; i++){
             episodes.push(baseEpisodeLink + i)
         }
         let titleName = $(".title_name h2").text()
-        const comments = iframeLink(episodeId.substring(1))
+        const comments = iframeLink(epiId.substring(1))
 
         result={
             titleName,
