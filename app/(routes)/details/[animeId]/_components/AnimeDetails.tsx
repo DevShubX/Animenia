@@ -96,9 +96,9 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
             Episodes
           </div>
           <div className="grid grid-cols-7 gap-4 max-lg:grid-cols-6 max-md:grid-cols-4 max-sm:grid-cols-3 mt-2 max-h-[270px] overflow-y-scroll">
-            {anilistData.animeEpisodes.map((item: any, index: number) => (
+            {anilistData.animeEpisodes.map((url: any, index: number) => (
               <Link
-                href={""}
+                href={`/watch/${url}`}
                 className="bg-white whitespace-nowrap p-2 hover:bg-red-100 font-[family-name:var(--font-gilroy-medium)] rounded-md"
               >
                 Episode {index + 1}
