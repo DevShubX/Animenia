@@ -29,7 +29,7 @@ const FavoriteAnimeSlider = () => {
             <SliderNav
                 icon= {Image}
                 title="Favorite Anime"
-                href="/favorite"
+                href="/favorite?page=1"
             />
             {isLoading && <SliderSkeleton/>}
             {!isLoading && (<div className="w-full p-5 max-sm:px-2">

@@ -3,7 +3,6 @@ import AnimeCard from "@/components/Cards/AnimeCard";
 import SliderNav from "@/components/Home/SliderNav";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import SliderSkeleton from "@/components/Skeletons/SliderSkeleton";
@@ -26,7 +25,7 @@ const PopularAnimeSlider = () => {
 
   return (
     <div>
-      <SliderNav icon= {Image} title="Popular Anime" href="/popular" />
+      <SliderNav icon= {Image} title="Popular Anime" href="/popular?page=1" />
       {isLoading && <SliderSkeleton />}
       {!isLoading && (
         <div className="w-full p-5 max-sm:px-2">

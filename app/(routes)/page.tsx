@@ -6,31 +6,34 @@ import FavoriteAnimeSlider from "./_components/FavoriteAnimeSlider";
 import TrendingAnimeSlider from "./_components/TrendingAnimeSlider";
 import ReleasingAnime from "./_components/ReleasingAnime";
 import ReviewAnime from "./_components/ReviewAnime";
+import AnimeCarousel from "./_components/AnimeCarousel";
 
 export default function Homepage() {
-
   // const onSignOut = async() =>{
   //   await signOut(auth);
   // }
 
   return (
-    <div className="max-sm:mx-5 max-lg:mx-[50px] lg:ml-[100px] lg:mr-[50px]">
-      <div className="flex items-start justify-center gap-x-8 max-sm:block">
-        <div className="grow max-w-[80%] max-sm:max-w-[100%]">
-          <PopularAnimeSlider />
-          <Top100AnimeSlider />
-          <TrendingAnimeSlider />
-          <FavoriteAnimeSlider />
+    <div>
+      <AnimeCarousel />
+      <div className="max-sm:mx-5 max-lg:mx-[50px] lg:ml-[100px] lg:mr-[50px]">
+        <div className="flex items-start justify-center gap-x-8 max-sm:block">
+          <div className="grow max-w-[80%] max-sm:max-w-[100%]">
+            <PopularAnimeSlider />
+            <Top100AnimeSlider />
+            <TrendingAnimeSlider />
+            <FavoriteAnimeSlider />
+          </div>
+          <div className="w-full">
+            <ReleasingAnime />
+            <ReviewAnime />
+          </div>
         </div>
-        <div className="w-full"> 
-          <ReleasingAnime />
-          <ReviewAnime />
-        </div>
-      </div>
 
-      {/* <button onClick={onSignOut}>
+        {/* <button onClick={onSignOut}>
         Sign out
-      </button> */}
+        </button> */}
+      </div>
     </div>
   );
 }

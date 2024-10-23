@@ -33,7 +33,6 @@ const SliderNav = ({icon:Icon , title , href , path , subTitle}:SliderNavProps) 
             </Link>
           )}
         </div>
-        <div>
           {path && (
             <Link
               href={path}
@@ -43,7 +42,6 @@ const SliderNav = ({icon:Icon , title , href , path , subTitle}:SliderNavProps) 
               <BsArrowRightSquareFill className="w-6 h-6" />
             </Link>
           )}
-        </div>
       </div>
   )
 }

@@ -29,7 +29,7 @@ const TrendingAnimeSlider = () => {
             <SliderNav
                 icon= {Image}
                 title="Trending Anime"
-                href="/trending "
+                href="/trending?page=1"
             />
             {isLoading && <SliderSkeleton/>}
             {!isLoading && (<div className="w-full p-5 max-sm:px-2">
