@@ -1,4 +1,5 @@
 "use client";
+import SearchSkeleton from "@/components/Skeletons/SearchSkeleton";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,7 +29,7 @@ const SearchPage = () => {
         Search Result for: <span className="capitalize italic">{query}</span>{" "}
       </div>
       {isLoading ? (
-        <div>Loading.....</div>
+        <SearchSkeleton />
       ) : (
         <div className="grid grid-cols-7 gap-y-5 mt-5 max-2xl:grid-cols-6 max-xl:grid-cols-5 max-lg:grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-2">
           {searchResult.map((item) => (

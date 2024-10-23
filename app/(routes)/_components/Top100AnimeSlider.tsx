@@ -29,7 +29,7 @@ const Top100AnimeSlider = () => {
             <SliderNav
                 icon= {Image}
                 title="Top 100 Anime"
-                href="/top100"
+                href="/top100?page=1"
             />
             {isLoading && <SliderSkeleton/>}
             {!isLoading && (<div className="w-full p-5 max-sm:px-2">
