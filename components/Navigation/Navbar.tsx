@@ -40,8 +40,8 @@ const Navbar = () => {
         <Link href="#" className="hover:text-gray-400">
           Genre
         </Link>
-        <Link href="#" className="hover:text-gray-400">
-          Articles
+        <Link href="/review?page=1" className="hover:text-gray-400">
+          Reviews
         </Link>
       </div>
       <div className="relative flex items-center justify-center space-x-3">

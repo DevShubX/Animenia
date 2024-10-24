@@ -16,7 +16,7 @@ export default function Homepage() {
   return (
     <div>
       <AnimeCarousel />
-      <div className="max-sm:mx-5 max-lg:mx-[50px] lg:ml-[100px] lg:mr-[50px]">
+      <div className="max-sm:mx-5 max-lg:mx-[50px] lg:ml-[50px] lg:mr-[50px]">
         <div className="flex items-start justify-center gap-x-8 max-sm:block">
           <div className="grow max-w-[80%] max-sm:max-w-[100%]">
             <PopularAnimeSlider />
