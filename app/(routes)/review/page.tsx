@@ -39,7 +39,7 @@ const AnimeReviewPage = () => {
       {!isLoading && (
         <div className="grid grid-cols-5 gap-8 my-5 max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
           {reviewAnime.map((item: any) => (
-            <div>
+            <Link href={`review/${item.id}`}>
               <Image
                 src={item?.media?.bannerImage ?? '/static/noImage.jfif'} 
                 alt="Review"
@@ -54,7 +54,7 @@ const AnimeReviewPage = () => {
                 </div>
                 <div className="text-gray-500 line-clamp-2">{item?.summary}</div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

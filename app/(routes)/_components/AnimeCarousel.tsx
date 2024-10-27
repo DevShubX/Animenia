@@ -7,7 +7,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "./style.css";
 import Image from "next/image";
 import { CirclePlayIcon, MonitorPlayIcon } from "lucide-react";
 import Link from "next/link";
