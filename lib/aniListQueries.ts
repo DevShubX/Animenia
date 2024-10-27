@@ -434,3 +434,31 @@ export const releaseingAnimeQuery = `
 		}
 	}
 `;
+export const getAnimeReviewsByIdQuery = `
+query($reviewId: Int) {
+  Page {
+    reviews(id: $reviewId) {
+      id
+      summary
+      body
+      rating
+      userRating
+      score
+      media {
+        title {
+          romaji
+          english
+          native
+          userPreferred
+        }
+        bannerImage
+        coverImage {
+          extraLarge
+          large
+          medium
+          color
+        }
+      }
+    }
+  }
+}`;
