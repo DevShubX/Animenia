@@ -20,7 +20,7 @@ const Top100AnimeSlider = () => {
     const getTop100Anime = async () => {
         setIsLoading(true)
         const response = await axios.get("/api/anime/top100")
-        setTop100Anime(response.data.result.data.Page.media)
+        setTop100Anime(response.data.result?.data?.Page?.media)
         setIsLoading(false)
     }
 
@@ -61,7 +61,7 @@ const Top100AnimeSlider = () => {
                       },
                     }}
                 >
-                    {top100Anime.map((item: any) => (
+                    {top100Anime?.map((item: any) => (
                         <SwiperSlide key={item.id}>
                             <AnimeCard detail={item} />
                         </SwiperSlide>

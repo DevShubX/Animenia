@@ -17,7 +17,7 @@ const ReviewAnime = () => {
   const getAnimeReview = async () => {
     setIsLoading(true);
     const response = await axios.get("/api/anime/review?type=ANIME&count=5");
-    setReviewAnime(response.data.result.data.Page.reviews);
+    setReviewAnime(response.data.result?.data?.Page?.reviews);
     setIsLoading(false);
   };
   return (

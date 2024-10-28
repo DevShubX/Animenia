@@ -20,7 +20,7 @@ const TrendingAnimeSlider = () => {
     const getTrendingAnime = async () => {
         setIsLoading(true)
         const response = await axios.get("/api/anime/trending")
-        setTrendingAnime(response.data.result.data.Page.media)
+        setTrendingAnime(response.data.result?.data?.Page?.media)
         setIsLoading(false)
     }
 
@@ -61,7 +61,7 @@ const TrendingAnimeSlider = () => {
                       },
                     }}
                 >
-                    {trendingAnime.map((item: any) => (
+                    {trendingAnime?.map((item: any) => (
                         <SwiperSlide key={item.id}>
                             <AnimeCard detail={item} />
                         </SwiperSlide>
