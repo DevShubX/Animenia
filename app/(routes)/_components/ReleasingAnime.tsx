@@ -19,7 +19,7 @@ const ReleasingAnime = () => {
     setIsLoading(true);
     const response = await axios.get("api/anime/releasing?status=RELEASING");
     console.log(response.data.result?.data?.Page.media);
-    setReleasingAnime(response.data.result?.data?.Page.media);
+    setReleasingAnime(response.data.result?.data?.Page?.media);
     setIsLoading(false);
   };
 

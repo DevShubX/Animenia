@@ -3,6 +3,7 @@ import SliderNav from "@/components/Home/SliderNav";
 import axios from "axios";
 import { Video } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const ReviewAnime = () => {
@@ -16,7 +17,7 @@ const ReviewAnime = () => {
   const getAnimeReview = async () => {
     setIsLoading(true);
     const response = await axios.get("/api/anime/review?type=ANIME&count=5");
-    setReviewAnime(response.data.result.data.Page.reviews);
+    setReviewAnime(response.data.result?.data?.Page?.reviews);
     setIsLoading(false);
   };
   return (
@@ -26,7 +27,7 @@ const ReviewAnime = () => {
         <div>Loading.....</div>
       ) : (
         reviewAnime.map((item) => (
-          <div className="relative font-[family-name:var(--font-gilroy-medium)]">
+          <Link href={`/review/${item.id}`} className="relative font-[family-name:var(--font-gilroy-medium)]">
             <Image
               className=" w-full h-[150px] my-4 rounded-[10px] object-cover cursor-pointer"
               src={item.media.bannerImage}
@@ -37,7 +38,7 @@ const ReviewAnime = () => {
             <div className="animeReviewcard w-full absolute bottom-0 p-2 text-white line-clamp-1">
                 {item.summary}
             </div>
-          </div>
+          </Link>
         ))
       )}
     </>

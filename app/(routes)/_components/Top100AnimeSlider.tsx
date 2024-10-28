@@ -20,7 +20,7 @@ const Top100AnimeSlider = () => {
     const getTop100Anime = async () => {
         setIsLoading(true)
         const response = await axios.get("/api/anime/top100")
-        setTop100Anime(response.data.result.data.Page.media)
+        setTop100Anime(response.data.result?.data?.Page?.media)
         setIsLoading(false)
     }
 
@@ -29,7 +29,7 @@ const Top100AnimeSlider = () => {
             <SliderNav
                 icon= {Image}
                 title="Top 100 Anime"
-                href="/top100"
+                href="/top100?page=1"
             />
             {isLoading && <SliderSkeleton/>}
             {!isLoading && (<div className="w-full p-5 max-sm:px-2">
@@ -56,12 +56,12 @@ const Top100AnimeSlider = () => {
                         spaceBetween: 30,
                       },
                       1500: {
-                        slidesPerView: 4,
+                        slidesPerView: 5,
                         spaceBetween: 45,
                       },
                     }}
                 >
-                    {top100Anime.map((item: any) => (
+                    {top100Anime?.map((item: any) => (
                         <SwiperSlide key={item.id}>
                             <AnimeCard detail={item} />
                         </SwiperSlide>

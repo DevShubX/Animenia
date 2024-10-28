@@ -5,7 +5,9 @@ const HomeLayout = ({children}:{children:React.ReactNode}) => {
   return (
     <div className='w-full'>
         <Navbar />
-        {children}
+        <main className='w-full'>
+          {children}
+        </main>
     </div>
   )
 }

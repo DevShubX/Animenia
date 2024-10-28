@@ -20,7 +20,7 @@ const FavoriteAnimeSlider = () => {
     const getFavoriteAnime = async () => {
         setIsLoading(true)
         const response = await axios.get("/api/anime/favorite")
-        setFavoriteAnime(response.data.result.data.Page.media)
+        setFavoriteAnime(response.data.result?.data?.Page?.media)
         setIsLoading(false)
     }
 
@@ -29,7 +29,7 @@ const FavoriteAnimeSlider = () => {
             <SliderNav
                 icon= {Image}
                 title="Favorite Anime"
-                href="/favorite"
+                href="/favorite?page=1"
             />
             {isLoading && <SliderSkeleton/>}
             {!isLoading && (<div className="w-full p-5 max-sm:px-2">
@@ -56,12 +56,12 @@ const FavoriteAnimeSlider = () => {
                         spaceBetween: 30,
                       },
                       1500: {
-                        slidesPerView: 4,
+                        slidesPerView: 5,
                         spaceBetween: 45,
                       },
                     }}
                 >
-                    {favoriteAnime.map((item: any) => (
+                    {favoriteAnime?.map((item: any) => (
                         <SwiperSlide key={item.id}>
                             <AnimeCard detail={item} />
                         </SwiperSlide>

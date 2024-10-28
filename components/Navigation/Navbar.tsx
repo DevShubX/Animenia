@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white flex items-center w-full h-full justify-between p-3">
-      <div>
+      <Link href='/'>
         <Image
           className="w-[100px] h-[50px]"
           src="/static/animenia-logo.png"
@@ -26,9 +26,9 @@ const Navbar = () => {
           width={100}
           height={100}
         />
-      </div>
+      </Link>
       <div className="hidden md:flex space-x-6 font-[family-name:var(--font-gilroy-medium)]">
-        <Link href="#" className="hover:text-gray-400">
+        <Link href="/" className="hover:text-gray-400">
           Home
         </Link>
         <Link href="#" className="hover:text-gray-400">
@@ -40,8 +40,8 @@ const Navbar = () => {
         <Link href="#" className="hover:text-gray-400">
           Genre
         </Link>
-        <Link href="#" className="hover:text-gray-400">
-          Articles
+        <Link href="/review?page=1" className="hover:text-gray-400">
+          Reviews
         </Link>
       </div>
       <div className="relative flex items-center justify-center space-x-3">

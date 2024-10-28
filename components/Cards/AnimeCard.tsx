@@ -11,11 +11,11 @@ const AnimeCard = ({detail}:AnimeCardProps) => {
   return (
     <Link href={`/search?q=${detail.title.romaji ?? detail.title.userPreferred}`} className='flex-shrink-0 relative w-[250px] h-[330px] max-md:w-[180px] max-md:h-[235px] max-sm:w-[170px] max-sm:h-[235px]'>
         <Image
-            src={detail.coverImage.large} 
+            src={detail.coverImage.large ?? detail.coverImage.extraLarge} 
             width={400}
             height={400}
             alt="img"
-            className='w-full h-[330px] max-md:w-[180px] max-md:h-[235px] max-sm:w-[170px] max-sm:h-[235px] object-cover rounded-[22px] max-md:rounded-[12px]' 
+            className='w-[250px] h-[330px] max-md:w-[180px] max-md:h-[235px] max-sm:w-[170px] max-sm:h-[235px] object-cover rounded-[22px] max-md:rounded-[12px]' 
         />
         <div className='absolute bottom-0 w-full pb-3 pt-3 animecard'>
           <div className=' pl-6 mb-2 left-0 truncate text-xl text-red-500 font-[family-name:var(--font-gilroy-bold)] max-sm:pl-2 max-sm:text-[18px]'>

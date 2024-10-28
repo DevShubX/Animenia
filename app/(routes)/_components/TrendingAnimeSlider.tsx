@@ -20,7 +20,7 @@ const TrendingAnimeSlider = () => {
     const getTrendingAnime = async () => {
         setIsLoading(true)
         const response = await axios.get("/api/anime/trending")
-        setTrendingAnime(response.data.result.data.Page.media)
+        setTrendingAnime(response.data.result?.data?.Page?.media)
         setIsLoading(false)
     }
 
@@ -29,7 +29,7 @@ const TrendingAnimeSlider = () => {
             <SliderNav
                 icon= {Image}
                 title="Trending Anime"
-                href="/trending "
+                href="/trending?page=1"
             />
             {isLoading && <SliderSkeleton/>}
             {!isLoading && (<div className="w-full p-5 max-sm:px-2">
@@ -56,12 +56,12 @@ const TrendingAnimeSlider = () => {
                         spaceBetween: 30,
                       },
                       1500: {
-                        slidesPerView: 4,
+                        slidesPerView: 5,
                         spaceBetween: 45,
                       },
                     }}
                 >
-                    {trendingAnime.map((item: any) => (
+                    {trendingAnime?.map((item: any) => (
                         <SwiperSlide key={item.id}>
                             <AnimeCard detail={item} />
                         </SwiperSlide>

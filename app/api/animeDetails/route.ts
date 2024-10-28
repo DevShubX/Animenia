@@ -2,7 +2,6 @@ import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import * as cheerio from "cheerio";
 import { searchAnimeQuery } from "@/lib/aniListQueries";
-import { stat } from "fs";
 
 const url = "https://gogoanime3.net";
 const anilistUrl = "https://graphql.anilist.co";
@@ -60,7 +59,7 @@ export async function GET(req: NextRequest) {
     const $$ = cheerio.load(episodeHtml.data);
 
     $$("#episode_related > li").each((i, el) => {
-      episodes.push($(el).find("a").attr("href")?.toString().trim());
+      episodes.push($(el).find("a").attr("href")?.toString().replace('/','').trim());
     });
     episodes.reverse();
     let anilistResponse;
@@ -99,6 +98,7 @@ export async function GET(req: NextRequest) {
           anifyData = {};
         });
     }
+    const jikanResponse = await axios.get(`https://api.jikan.moe/v4/anime/${anilistResponse?.data?.data?.Media?.idMal}/reviews`)
 
     let gogoResponse = {
       title,
@@ -134,6 +134,7 @@ export async function GET(req: NextRequest) {
         animeEpisodes: episodes,
         mappings: anifyData?.mappings,
         kitsuId: kitsuId,
+        malReviews: jikanResponse.data.data,
         ...anilistData,
       };
       result = {
