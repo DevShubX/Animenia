@@ -8,13 +8,12 @@ const ReviewPage = async ({ params }: { params: { reviewId: string } }) => {
     `http://localhost:3000/api/anime/review/${params.reviewId}`
   );
   const anilistData = response.data.result.data.Page.reviews[0];
-  console.log(anilistData);
 
   return (
     <div className="relative p-4 max-lg:p-0">
       <div className="relative">
         <Image
-          src={anilistData.media.bannerImage}
+          src={anilistData.media.bannerImage ?? "/static/noImage.jfif"}
           alt="image"
           width={2000}
           height={2000}

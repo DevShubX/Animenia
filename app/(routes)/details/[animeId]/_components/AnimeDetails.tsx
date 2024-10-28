@@ -20,7 +20,6 @@ interface AnimeDetailProps {
 
 const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
   const [showMore, setShowMore] = useState<boolean>(false);
-  console.log(anilistData.malReviews);
 
   return (
     <div className="p-6 max-md:p-3 flex flex-shrink-0 gap-x-5 max-lg:block">
