@@ -20,7 +20,7 @@ const FavoriteAnimeSlider = () => {
     const getFavoriteAnime = async () => {
         setIsLoading(true)
         const response = await axios.get("/api/anime/favorite")
-        setFavoriteAnime(response.data.result.data.Page.media)
+        setFavoriteAnime(response.data.result?.data?.Page?.media)
         setIsLoading(false)
     }
 
@@ -61,7 +61,7 @@ const FavoriteAnimeSlider = () => {
                       },
                     }}
                 >
-                    {favoriteAnime.map((item: any) => (
+                    {favoriteAnime?.map((item: any) => (
                         <SwiperSlide key={item.id}>
                             <AnimeCard detail={item} />
                         </SwiperSlide>

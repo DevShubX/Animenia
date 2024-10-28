@@ -19,7 +19,7 @@ const PopularAnimeSlider = () => {
   const getPopularAnime = async () => {
     setIsLoading(true);
     const response = await axios.get("/api/anime/popular");
-    setPopularAnime(response.data.result.data.Page.media);
+    setPopularAnime(response.data.result?.data?.Page?.media);
     setIsLoading(false);
   };
 
@@ -57,7 +57,7 @@ const PopularAnimeSlider = () => {
               },
             }}
           >
-            {popularAnime.map((item: any) => (
+            {popularAnime?.map((item: any) => (
               <SwiperSlide key={item.id}>
                 <AnimeCard detail={item} />
               </SwiperSlide>

@@ -1,3 +1,4 @@
+'use client'
 import { auth } from "@/firebase/firebase";
 import { signOut } from "firebase/auth";
 import PopularAnimeSlider from "./_components/PopularAnimeSlider";

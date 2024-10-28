@@ -11,7 +11,7 @@ const AnimeCard = ({detail}:AnimeCardProps) => {
   return (
     <Link href={`/search?q=${detail.title.romaji ?? detail.title.userPreferred}`} className='flex-shrink-0 relative w-[250px] h-[330px] max-md:w-[180px] max-md:h-[235px] max-sm:w-[170px] max-sm:h-[235px]'>
         <Image
-            src={detail.coverImage.large} 
+            src={detail.coverImage.large ?? detail.coverImage.extraLarge} 
             width={400}
             height={400}
             alt="img"

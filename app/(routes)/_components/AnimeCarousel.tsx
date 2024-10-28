@@ -23,7 +23,7 @@ const AnimeCarousel = () => {
   const getCarouselData = async () => {
     setIsLoading(true);
     const response = await axios.get("/api/anime/trending");
-    setCarouselData(response.data.result.data.Page.media);
+    setCarouselData(response.data.result?.data?.Page?.media);
     setIsLoading(false);
   };
 
