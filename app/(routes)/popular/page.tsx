@@ -34,7 +34,7 @@ const PopularPage = () => {
       <SliderNav title="Popular Anime" icon={ImageIcon} />
       {isLoading && <SearchSkeleton />}
       {!isLoading && (
-        <div className="grid grid-cols-7 max-xl:grid-cols-6 max-lg:grid-cols-5 max-md:grid-cols-4 max-sm:grid-cols-3 max-[400px]:grid-cols-2 gap-5 mt-5">
+        <div className=" grid grid-cols-7 max-xl:grid-cols-6 max-lg:grid-cols-5 max-md:grid-cols-4 max-sm:grid-cols-3 max-[400px]:grid-cols-2 gap-5 mt-5">
           {popularAnime.map((item) => (
             <Link href={`/search?q=${item.title.romaji ?? item.title.userPreferred}`}>
               <Image
@@ -44,7 +44,7 @@ const PopularPage = () => {
                 height={300}
                 className="rounded-lg w-[180px] h-[235px] max-md:w-[160px] max-md:h-[200px]"
               />
-              <div className="text-red-600 font-[family-name:var(--font-gilroy-bold)] truncate w-[150px] max-[450px]:w-[100px] max-[400px]:w-full ">
+              <div className="dark:text-white text-red-600 font-[family-name:var(--font-gilroy-bold)] truncate w-[150px] max-[450px]:w-[100px] max-[400px]:w-full ">
                 {item.title.romaji ?? item.title.userPreferred}
               </div>
             </Link>
@@ -59,7 +59,7 @@ const PopularPage = () => {
             Prev
           </Link>
         </div>
-        <div className="font-[family-name:var(--font-gilroy-medium)] bg-white px-4 py-2 rounded-md">
+        <div className="font-[family-name:var(--font-gilroy-medium)] dark:bg-black bg-white px-4 py-2 rounded-md">
           {page} OF {pageInfo.lastPage}
         </div>
         <div className="bg-red-600 text-white px-4 py-2 rounded-md flex gap-x-2">

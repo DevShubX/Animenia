@@ -3,9 +3,11 @@ import React from 'react'
 
 const HomeLayout = ({children}:{children:React.ReactNode}) => {
   return (
-    <div className='w-full'>
+    <div className='w-full '>
+      <div>
         <Navbar />
-        <main className='w-full'>
+      </div>
+        <main className='w-full h-full'>
           {children}
         </main>
     </div>

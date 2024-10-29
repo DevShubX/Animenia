@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ContextProvider from "@/GlobalContext/ContextProvider";
 import { Toaster } from "react-hot-toast";
-
+import { ThemeProvider } from "@/components/Theme/theme-provider";
 
 export const metadata: Metadata = {
   title: "Animenia",
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`
           ${gilroyMedium.variable}
@@ -26,15 +26,21 @@ export default function RootLayout({
           ${gilroyHeavy.variable}
           antialiased`}
       >
-        <ContextProvider>
-          <Toaster/>
-          {children}
-        </ContextProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ContextProvider>
+            <Toaster />
+            {children}
+          </ContextProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
 }
-
 
 const gilroyMedium = localFont({
   src: "./fonts/Gilroy-Medium.ttf",

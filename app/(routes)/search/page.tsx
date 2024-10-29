@@ -24,7 +24,7 @@ const SearchPage = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 h-screen">
       <div className="font-[family-name:var(--font-gilroy-medium)] text-2xl">
         Search Result for: <span className="capitalize italic">{query}</span>{" "}
       </div>

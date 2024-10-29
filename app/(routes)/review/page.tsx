@@ -28,8 +28,8 @@ const AnimeReviewPage = () => {
     const response = await axios.get(
       `/api/anime/review?type=ANIME&page=${page}&count=50`
     );
-    setReviewAnime(response.data.result.data.Page.reviews);
-    setPageInfo(response.data.result.data.Page.pageInfo);
+    setReviewAnime(response.data.result?.data?.Page?.reviews);
+    setPageInfo(response.data.result?.data?.Page?.pageInfo);
     setIsLoading(false);
   };
   return (
@@ -47,12 +47,12 @@ const AnimeReviewPage = () => {
                 height={1000}
                 className=" w-full h-[100px] object-cover rounded-tl-md rounded-tr-md"
               />
-              <div className="bg-white p-3 h-[100px] font-[family-name:var(--font-gilroy-medium)]">
+              <div className="dark:bg-[#333333] bg-white p-3 h-[100px] font-[family-name:var(--font-gilroy-medium)]">
                 <div className="text-red-600 text-[17px] break-words truncate">
                   <span>Review of </span>
                   {item.media?.title?.romaji ?? item.media?.title?.userPreferred}
                 </div>
-                <div className="text-gray-500 line-clamp-2">{item?.summary}</div>
+                <div className="dark:text-gray-400 text-gray-500 line-clamp-2">{item?.summary}</div>
               </div>
             </Link>
           ))}
@@ -64,7 +64,7 @@ const AnimeReviewPage = () => {
           <ArrowBigLeftDashIcon />
           <Link href={`/review?page=${page > 1 ? page - 1 : page}`}>Prev</Link>
         </div>
-        <div className="font-[family-name:var(--font-gilroy-medium)] bg-white px-4 py-2 rounded-md">
+        <div className="font-[family-name:var(--font-gilroy-medium)] dark:bg-black bg-white px-4 py-2 rounded-md">
           {page} OF {pageInfo?.lastPage}
         </div>
         <div className="bg-red-600 text-white px-4 py-2 rounded-md flex gap-x-2">

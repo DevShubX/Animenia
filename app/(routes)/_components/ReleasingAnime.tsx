@@ -35,7 +35,7 @@ const ReleasingAnime = () => {
         releasingAnime?.slice(0, 5)?.map((item, index) => (
           <div className="max-sm:flex max-sm:justify-between max-sm:p-2">
             <div>
-              <div className="flex text-red-500 font-[family-name:var(--font-gilroy-bold)] gap-x-3 mt-6 max-sm:mt-2">
+              <div className="flex dark:text-white text-red-500 font-[family-name:var(--font-gilroy-bold)] gap-x-3 mt-6 max-sm:mt-2">
                 <div>{item.title.romaji ?? item.title.userPreferred}</div>
                 <div onClick={() => toggle(index)} className="cursor-pointer">
                   {chevronIndex === index ? <ChevronUp /> : <ChevronDown />}
@@ -46,7 +46,7 @@ const ReleasingAnime = () => {
               </div>
               {item?.nextAiringEpisode && (
                 <div className='flex items-center gap-x-2'>
-                  <div className="text-[15px] text-[#696969] font-[family-name:var(--font-gilroy-medium)]">
+                  <div className="text-[15px] text-[#696969] dark:text-gray-400 font-[family-name:var(--font-gilroy-medium)]">
                     Airing Ep: {item.nextAiringEpisode?.episode ?? "NA"}
                   </div>
                   <div className="text-[15px] font-[family-name:var(--font-gilroy-medium)]">
