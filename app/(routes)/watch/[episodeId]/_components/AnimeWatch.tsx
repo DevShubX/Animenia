@@ -28,7 +28,7 @@ const AnimeWatch = ({data} : AnimeWatchProps) => {
               <Link
                 key={index}
                 href={`/watch/${url}`}
-                className="bg-white whitespace-nowrap p-2 hover:bg-red-100 font-[family-name:var(--font-gilroy-medium)] rounded-md"
+                className="dark:bg-[#333333] dark:hover:bg-gray-500 bg-white whitespace-nowrap p-2 hover:bg-red-100 font-[family-name:var(--font-gilroy-medium)] rounded-md"
               >
                 Episode {index + 1}
               </Link>
@@ -36,25 +36,25 @@ const AnimeWatch = ({data} : AnimeWatchProps) => {
           </div>
         </div>
       </div>
-      <div className='w-full'>
+      <div className='w-full '>
         <SliderNav title='External Links' icon={Link2} />
-        <Link href={data.vidstreaming} target='_blank' className='flex bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
+        <Link href={data.vidstreaming} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
           <TvMinimalPlayIcon />
           <div>Vidstreaming</div>
         </Link>
-        <Link href={data.gogoserver} target='_blank' className='flex bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
+        <Link href={data.gogoserver} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
           <TvMinimalPlayIcon />
           <div>Gogoserver</div>
         </Link>
-        <Link href={data.streamsb} target='_blank' className='flex bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
+        <Link href={data.streamsb} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
           <TvMinimalPlayIcon />
           <div>Streamsb</div>
         </Link>
-        <Link href={data.xstreamcdn} target='_blank' className='flex bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
+        <Link href={data.xstreamcdn} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
           <TvMinimalPlayIcon />
           <div>Xstreamcdn</div>
         </Link>
-        <Link href={data.mixdrop} target='_blank' className='flex bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
+        <Link href={data.mixdrop} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
           <TvMinimalPlayIcon />
           <div>Mixdrop</div>
         </Link>

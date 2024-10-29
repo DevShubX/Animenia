@@ -61,7 +61,7 @@ const SignInPage = () => {
     <div className='card w-full px-[4rem] py-[2rem] max-md:px-[2rem] max-md:mx-[1rem] rounded-[20px] shadow-lg max-w-md flex flex-col items-center '>
       <h1 className='text-center text-4xl mb-6 font-[family-name:var(--font-gilroy-bold)]'>Login</h1>
       <div className='space-y-4 w-full'>
-        <div className='bg-white w-full flex items-center p-2 border rounded-lg'>
+        <div className='dark:bg-[#121212] bg-white w-full flex items-center p-2 border rounded-lg'>
           <span>
             <HiOutlineMail className='w-6 h-6 text-gray-600' />
           </span>
@@ -74,7 +74,7 @@ const SignInPage = () => {
             className='w-full p-2 outline-none font-[family-name:var(--font-gilroy-medium)]'
           />
         </div>
-        <div className='bg-white flex items-center p-2 border rounded-lg'>
+        <div className='dark:bg-[#121212] bg-white flex items-center p-2 border rounded-lg'>
           <span>
             <GoUnlock className='w-6 h-6 text-gray-600' />
           </span>
@@ -93,16 +93,16 @@ const SignInPage = () => {
         </div>
       </div>
       <div className='w-full text-start mb-3 mt-1'>
-        <Link href={'/forgot-password'} className='text-gray-600 text-[15px] font-[family-name:var(--font-gilroy-medium)]'>
+        <Link href={'/forgot-password'} className='dark:text-gray-400 text-gray-600 text-[15px] font-[family-name:var(--font-gilroy-medium)]'>
           Forgot password
         </Link>
       </div>
       <button
         onClick={handleLogIn}
         disabled={isSigningIn}
-        className='bg-red-600 flex items-center justify-center w-full p-3 rounded-lg my-2 text-white text-[19px] font-[family-name:var(--font-gilroy-medium)]'>
+        className='dark:bg-white bg-red-600 flex items-center justify-center w-full p-3 rounded-lg my-2 text-white dark:text-[#121212] text-[19px] font-[family-name:var(--font-gilroy-medium)]'>
         {isSigningIn ? (
-          <div className='flex items-center justify-center gap-x-2'>
+          <div className='flex items-center justify-center gap-x-2 '>
             <Loader2 className='animate-spin' />
             <span>Loading...</span>
           </div>
@@ -113,9 +113,9 @@ const SignInPage = () => {
         )}
 
       </button>
-      <span className='mt-2 mb-4 font-[family-name:var(--font-gilroy-medium)]'>
+      <span className='mt-2 mb-4 font-[family-name:var(--font-gilroy-medium)] dark:text-gray-400'>
         Don&apos;t have an account?
-        <Link href={"/sign-up"} className=' ml-2 underline font-[family-name:var(--font-gilroy-bold)]'>
+        <Link href={"/sign-up"} className='text-red-600 dark:text-white ml-2 underline font-[family-name:var(--font-gilroy-bold)]'>
           Register
         </Link>
       </span>
@@ -123,7 +123,7 @@ const SignInPage = () => {
         type='button'
         onClick={onGoogleSignin}
         disabled={isSigninWithGoogle}
-        className='flex items-center w-full bg-white p-3 justify-center space-x-2 mt-4 rounded-lg font-[family-name:var(--font-gilroy-medium)]'>
+        className='flex items-center w-full bg-white dark:bg-[#121212] p-3 justify-center space-x-2 mt-4 rounded-lg font-[family-name:var(--font-gilroy-medium)]'>
         <FcGoogle className='w-8 h-8' />
         <span className='text-[17px]'>
           Sign in with Google

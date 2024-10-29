@@ -35,7 +35,7 @@ const ReviewAnime = () => {
               width={600}
               height={600}
             />
-            <div className="animeReviewcard w-full absolute bottom-0 p-2 text-white line-clamp-1">
+            <div className="animeReviewcard w-full absolute bottom-0 p-2 dark:text-white line-clamp-1">
                 {item.summary}
             </div>
           </Link>

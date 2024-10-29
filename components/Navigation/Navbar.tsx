@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useStateContext } from "@/GlobalContext/ContextProvider";
-import { Bookmark, BookMarked, LayoutGrid, Moon, Search, X } from "lucide-react";
+import { Bookmark, Moon, Search, X } from "lucide-react";
 import { useRouter } from "next/navigation";
+import MobileNav from "./MobileNav";
+import { ModeToggle } from "../Theme/ThemeToggle";
 
 const Navbar = () => {
   const router = useRouter()
@@ -17,7 +19,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-white flex items-center w-full h-full justify-between p-3">
+    <nav className="bg-white dark:bg-[#333333] flex items-center w-full h-full justify-between p-3">
       <Link href='/'>
         <Image
           className="w-[100px] h-[50px]"
@@ -46,8 +48,8 @@ const Navbar = () => {
       </div>
       <div className="relative flex items-center justify-center space-x-3">
         {isSearchOpen && (
-          <div className="flex absolute top-[] right-[160px] bg-gray-100 font-[family-name:var(--font-gilroy-medium)] p-2 rounded-[5px] space-x-2 ">
-            <Search className="text-gray-500"/>
+          <div className="max-sm:hidden flex absolute top-[] right-[180px] bg-gray-100 font-[family-name:var(--font-gilroy-medium)] p-2 rounded-[5px] space-x-2 ">
+            <Search className="text-gray-500 "/>
             <input
               type="text"
               placeholder="Search..."
@@ -62,11 +64,13 @@ const Navbar = () => {
             />
           </div>
         )}
-        <div onClick={() => setIsSearchOpen(!isSearchOpen)} className="cursor-pointer ">
+        <div onClick={() => setIsSearchOpen(!isSearchOpen)} className="cursor-pointer max-sm:hidden">
           {isSearchOpen ? <X className="text-red-500 w-8 h-8" />: <Search />}
         </div>
-        <Moon />
-        <Bookmark />
+        <div className="max-sm:hidden">
+          <ModeToggle />
+        </div>
+        <Bookmark  className="max-sm:hidden"/>
         <Image
           src={currentUser?.photoURL!}
           alt="pfp"
@@ -74,7 +78,7 @@ const Navbar = () => {
           height={100}
           className="w-10 h-10 rounded-[50%] border-2 border-purple-500 object-cover p-[1px]"
         />
-        <LayoutGrid className="hidden max-md:block" />
+        <MobileNav />
       </div>
     </nav>
   );

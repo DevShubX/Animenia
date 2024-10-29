@@ -6,7 +6,7 @@ html,
 body,
 :root {
     height: 100%;
-    background-color: rgb(234, 234, 234);
+    /* background-color: rgb(234, 234, 234); */
 }
 
 .card {
@@ -14,12 +14,35 @@ body,
     -webkit-backdrop-filter: blur(20px) saturate(181%);
     background-color: rgba(240, 243, 248, 0.76);
 }
+:is(.dark){
+    .card{
+        backdrop-filter: blur(10px) saturate(180%);
+        -webkit-backdrop-filter: blur(10px) saturate(180%);
+        background-color: rgba(0, 0, 0, 0.75);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.125);
+    }
+    .animecard {
+        backdrop-filter: blur(6px) saturate(180%);
+        -webkit-backdrop-filter: blur(6px) saturate(180%);
+        background-color: rgba(0, 0, 0, 0.75);
+        border-radius: 0 0 8px 8px;
+        overflow: hidden;
+    }
+    .animeReviewcard {
+        backdrop-filter: blur(6px) saturate(180%);
+        -webkit-backdrop-filter: blur(6px) saturate(180%);
+        background-color: rgba(0, 0, 0, 0.75);
+        border-radius: 0 0 10px 10px;
+        overflow: hidden;
+    }
 
+}
 .animecard {
     backdrop-filter: blur(6px) saturate(180%);
     -webkit-backdrop-filter: blur(6px) saturate(180%);
     background-color: rgba(239, 241, 245, 0.7);
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 8px 8px;
     overflow: hidden;
 }
 
@@ -105,7 +128,7 @@ body,
 }
 @layer base {
   :root {
-        --background: 0 0% 100%;
+        --background: 0 0.0% 91.8%;
         --foreground: 0 0% 3.9%;
         --card: 0 0% 100%;
         --card-foreground: 0 0% 3.9%;
@@ -132,7 +155,7 @@ body,
         --radius: 0.5rem;
     }
   .dark {
-        --background: 0 0% 3.9%;
+        --background: 0 0% 9.0%;
         --foreground: 0 0% 98%;
         --card: 0 0% 3.9%;
         --card-foreground: 0 0% 98%;

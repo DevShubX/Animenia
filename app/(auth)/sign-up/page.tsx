@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { uploadImageToFirebase } from "@/lib/firebaseMethods";
 import { Loader2 } from "lucide-react";
+import { ModeToggle } from "@/components/Theme/ThemeToggle";
 
 const SignUpPage = () => {
 
@@ -91,7 +92,7 @@ const SignUpPage = () => {
         <label htmlFor='profileImage' className="relative flex justify-center items-center w-full">
           {!photoUrl && !selectedPhoto && (
             <div className="flex justify-center items-center w-[100px] h-[100px] rounded-[50%] bg-slate-200 cursor-pointer">
-              <TbCameraPlus className="w-8 h-8" />
+              <TbCameraPlus className="w-8 h-8 dark:text-black" />
             </div>
           )}
           {photoUrl && selectedPhoto && (
@@ -109,7 +110,7 @@ const SignUpPage = () => {
             </div>
           )}
         </label>
-        <div className="bg-white w-full flex items-center p-2 border rounded-lg">
+        <div className="dark:bg-[#121212] bg-white w-full flex items-center p-2 border rounded-lg">
           <span>
             <FaRegUser className="w-6 h-6 text-gray-600" />
           </span>
@@ -122,7 +123,7 @@ const SignUpPage = () => {
             className="w-full p-2 outline-none font-[family-name:var(--font-gilroy-medium)]"
           />
         </div>
-        <div className="bg-white w-full flex items-center p-2 border rounded-lg">
+        <div className="dark:bg-[#121212] bg-white w-full flex items-center p-2 border rounded-lg">
           <span>
             <HiOutlineMail className="w-6 h-6 text-gray-600" />
           </span>
@@ -135,7 +136,7 @@ const SignUpPage = () => {
             className="w-full p-2 outline-none font-[family-name:var(--font-gilroy-medium)]"
           />
         </div>
-        <div className="bg-white flex items-center p-2 border rounded-lg">
+        <div className="dark:bg-[#121212] bg-white flex items-center p-2 border rounded-lg">
           <span>
             <GoUnlock className="w-6 h-6 text-gray-600" />
           </span>
@@ -160,7 +161,7 @@ const SignUpPage = () => {
       <button
         onClick={handleSignUp}
         disabled={isLoading}
-        className="bg-red-600 w-full p-3 rounded-lg my-4 text-white text-[19px] font-[family-name:var(--font-gilroy-medium)]">
+        className="dark:bg-white bg-red-600 w-full p-3 rounded-lg my-4 text-white dark:text-black text-[19px] font-[family-name:var(--font-gilroy-medium)]">
         {isLoading ? (
           <div className="flex items-center justify-center gap-x-2">
             <Loader2 className="animate-spin" />
@@ -172,11 +173,11 @@ const SignUpPage = () => {
           </>
         )}
       </button>
-      <span className="mt-2 mb-4 font-[family-name:var(--font-gilroy-medium)]">
+      <span className="mt-2 mb-4 font-[family-name:var(--font-gilroy-medium)] dark:text-gray-500">
         Already have an account?
         <Link
           href={"/sign-in"}
-          className=" ml-2 underline font-medium font-[family-name:var(--font-gilroy-bold)]"
+          className=" ml-2 underline font-medium font-[family-name:var(--font-gilroy-bold)] text-red-600 dark:text-white"
         >
           Login
         </Link>
@@ -184,7 +185,7 @@ const SignUpPage = () => {
       <button
         onClick={onGoogleSignIn}
         disabled={isSignInWithGoogle}
-        className="flex items-center w-full bg-white p-3 justify-center space-x-2 mt-4 rounded-lg font-[family-name:var(--font-gilroy-medium)]">
+        className="flex items-center w-full bg-white dark:bg-[#121212] p-3 justify-center space-x-2 mt-4 rounded-lg font-[family-name:var(--font-gilroy-medium)]">
         <FcGoogle className="w-8 h-8" />
         <span className="text-[17px]">Sign in with Google</span>
       </button>

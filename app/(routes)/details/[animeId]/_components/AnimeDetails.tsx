@@ -24,7 +24,7 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
   return (
     <div className="p-6 max-md:p-3 flex flex-shrink-0 gap-x-5 max-lg:block">
       <div className="w-[85%] max-lg:w-full">
-        <div className="bg-white mt-5 p-4 rounded-lg flex items-center justify-between ">
+        <div className="dark:bg-[#333333] bg-white mt-5 p-4 rounded-lg flex items-center justify-between ">
           <div className="flex items-center space-x-2">
             <div className="bg-red-600 flex items-center p-2 rounded-lg">
               <ImgIcon className="text-white w-6 h-6" />
@@ -70,7 +70,7 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
             <div
               dangerouslySetInnerHTML={{ __html: anilistData.description }}
               className={cn(
-                "mt-4 font-[family-name:var(--font-gilroy-medium)] text-[18px] text-gray-600 overflow-hidden",
+                "mt-4 font-[family-name:var(--font-gilroy-medium)] text-[18px] dark:text-gray-400 text-gray-600 overflow-hidden",
                 showMore && "h-full",
                 !showMore && "h-[220px] max-h-[220px]"
               )}
@@ -98,7 +98,7 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
             {anilistData.animeEpisodes.map((url: any, index: number) => (
               <Link
                 href={`/watch/${url}`}
-                className="bg-white whitespace-nowrap p-2 hover:bg-red-100 font-[family-name:var(--font-gilroy-medium)] rounded-md"
+                className="dark:bg-[#333333] dark:hover:bg-gray-500 bg-white whitespace-nowrap p-2 hover:bg-red-100 font-[family-name:var(--font-gilroy-medium)] rounded-md"
               >
                 Episode {index + 1}
               </Link>
@@ -155,7 +155,7 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
           <div>
             {anilistData?.externalLinks?.map((item: any) => (
               <Link href={item?.url} target="_blank">
-                <div className="flex items-center gap-x-3 bg-white my-3 p-[6px] rounded-md hover:bg-slate-300">
+                <div className="flex items-center gap-x-3 dark:bg-[#333333] dark:hover:bg-gray-500 bg-white my-3 p-[6px] rounded-md hover:bg-slate-300">
                   {item.icon ? (
                     <div
                       style={{ backgroundColor: item.color }}
@@ -188,7 +188,7 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
               <Link
                 href={item.url}
                 target="_blank"
-                className="w-full bg-white cursor-pointer rounded-md p-2 font-[family-name:var(--font-gilroy-medium)]"
+                className="w-full dark:bg-[#333333] dark:hover:bg-gray-500 bg-white cursor-pointer rounded-md p-2 font-[family-name:var(--font-gilroy-medium)]"
               >
                 <div className="flex items-center gap-x-3">
                   <Image

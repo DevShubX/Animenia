@@ -44,7 +44,7 @@ const AnimeCarousel = () => {
           disableOnInteraction: false,
         }}
       >
-        {carouselData.map(
+        {carouselData?.map(
           (item: any, index: any) =>
             (item.bannerImage !== null || undefined || "") && (
               <SwiperSlide key={item.id}>
