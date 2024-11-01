@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { FaAngleLeft } from "react-icons/fa";
-import { HiOutlineMail } from "react-icons/hi";
+import toast from "react-hot-toast";
 import Image from "next/image";
 import Link from "next/link";
-import toast from "react-hot-toast";
+import { FaAngleLeft } from "react-icons/fa";
+import { HiOutlineMail } from "react-icons/hi";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "@/firebase/firebase";
 import { Loader2 } from "lucide-react";

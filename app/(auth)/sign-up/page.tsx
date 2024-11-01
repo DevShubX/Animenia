@@ -1,21 +1,20 @@
 "use client"
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import Image from 'next/image'
+import Link from "next/link";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { GoUnlock } from "react-icons/go";
 import { HiOutlineMail } from "react-icons/hi";
 import { TbCameraPlus } from "react-icons/tb";
-import Image from 'next/image'
 import { MdDelete } from "react-icons/md";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
 import { auth } from "@/firebase/firebase";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { uploadImageToFirebase } from "@/lib/firebaseMethods";
 import { Loader2 } from "lucide-react";
-import { ModeToggle } from "@/components/Theme/ThemeToggle";
 
 const SignUpPage = () => {
 

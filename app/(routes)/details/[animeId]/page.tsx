@@ -7,7 +7,7 @@ const AnimeDetailsPage = async ({params}:{params:{animeId:string}}) => {
 
   return (
     <div>
-      <AnimeDetails gogoData={response.data.result.gogoResponse} anilistData={response.data.result.anilistResponse} />
+      <AnimeDetails gogoData={response.data.result.gogoResponse} anilistData={response.data.result.anilistResponse} animeId={params.animeId} />
     </div>
   )
 }

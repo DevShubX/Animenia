@@ -4,7 +4,6 @@ import { decryptEncryptAjaxResponse, generateEncryptAjaxParameters } from "./aja
 
 const BASE_URL = "https://gogoanime3.net"
 const goload_stream_url = "https://goload.pro/streaming.php"
-const ENCRYPTION_KEYS_URL = "https://raw.githubusercontent.com/justfoolingaround/animdl-provider-benchmarks/master/api/gogoanime.json"
 const USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"
 
 export async function scrapeSourceFiles(id:string){
@@ -42,8 +41,6 @@ export async function scrapeSourceFiles(id:string){
             }
         )
         const response = await decryptEncryptAjaxResponse(fetchRes.data.data)
-
-        console.log(response)
 
         if(!response.source) return { error: "No source found"}
 

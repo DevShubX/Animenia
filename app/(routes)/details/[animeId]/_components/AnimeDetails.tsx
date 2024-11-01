@@ -1,4 +1,5 @@
 "use client";
+import EpisodeSection from "@/components/Anime/EpisodeSection";
 import SliderNav from "@/components/Home/SliderNav";
 import { cn } from "@/lib/methods";
 import {
@@ -16,9 +17,10 @@ import { FaStar, FaYoutube } from "react-icons/fa";
 interface AnimeDetailProps {
   gogoData: any;
   anilistData: any;
+  animeId: string,
 }
 
-const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
+const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
   const [showMore, setShowMore] = useState<boolean>(false);
 
   return (
@@ -91,19 +93,7 @@ const AnimeDetails = ({ gogoData, anilistData }: AnimeDetailProps) => {
           </div>
         </div>
         <div>
-          <div className="text-2xl text-red-600 font-[family-name:var(--font-gilroy-bold)] mt-6 ">
-            Episodes
-          </div>
-          <div className="grid grid-cols-7 gap-4 max-lg:grid-cols-6 max-md:grid-cols-4 max-sm:grid-cols-3 mt-2 max-h-[270px] overflow-y-scroll">
-            {anilistData.animeEpisodes.map((url: any, index: number) => (
-              <Link
-                href={`/watch/${url}`}
-                className="dark:bg-[#333333] dark:hover:bg-gray-500 bg-white whitespace-nowrap p-2 hover:bg-red-100 font-[family-name:var(--font-gilroy-medium)] rounded-md"
-              >
-                Episode {index + 1}
-              </Link>
-            ))}
-          </div>
+          <EpisodeSection anilistData={anilistData} gogoData={gogoData} animeId={animeId}/>
         </div>
         <div>
           <div className="text-2xl text-red-600 font-[family-name:var(--font-gilroy-bold)] mt-6 ">
