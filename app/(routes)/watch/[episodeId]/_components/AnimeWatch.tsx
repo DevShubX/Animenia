@@ -3,12 +3,17 @@ import {Link2, TvMinimalPlayIcon, VideoIcon } from 'lucide-react'
 import React from 'react'
 import ArtPlayerAnime from './ArtPlayerAnime'
 import Link from 'next/link'
+import EpisodeSection from '@/components/Anime/EpisodeSection'
 
 interface AnimeWatchProps{
-  data: any
+  data: any,
+  anilistData: any,
+  gogoData: any,
+  animeId: any,
 }
 
-const AnimeWatch = ({data} : AnimeWatchProps) => {
+const AnimeWatch = ({data, anilistData, gogoData, animeId} : AnimeWatchProps) => {
+
   return (
     <div className='p-6 flex gap-x-5 max-lg:flex-col'>
       <div className='w-[85%] flex-shrink-0 max-lg:w-full'>
@@ -20,41 +25,28 @@ const AnimeWatch = ({data} : AnimeWatchProps) => {
           </div>
         </div>
         <div>
-          <div className="text-2xl text-red-600 font-[family-name:var(--font-gilroy-bold)] mt-6 ">
-            Episodes
-          </div>
-          <div className="grid grid-cols-7 gap-4 max-lg:grid-cols-6 max-md:grid-cols-4 max-sm:grid-cols-3 mt-2 max-h-[270px] overflow-y-scroll">
-            {data.episodes.map((url: any, index: number) => (
-              <Link
-                key={index}
-                href={`/watch/${url}`}
-                className="dark:bg-[#333333] dark:hover:bg-gray-500 bg-white whitespace-nowrap p-2 hover:bg-red-100 font-[family-name:var(--font-gilroy-medium)] rounded-md"
-              >
-                Episode {index + 1}
-              </Link>
-            ))}
-          </div>
+          <EpisodeSection anilistData={anilistData} gogoData={gogoData} animeId={animeId} />
         </div>
       </div>
       <div className='w-full '>
         <SliderNav title='External Links' icon={Link2} />
-        <Link href={data.vidstreaming} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
+        <Link href={data?.vidstreaming ?? "#"} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
           <TvMinimalPlayIcon />
           <div>Vidstreaming</div>
         </Link>
-        <Link href={data.gogoserver} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
+        <Link href={data?.gogoserver ?? "#"} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
           <TvMinimalPlayIcon />
           <div>Gogoserver</div>
         </Link>
-        <Link href={data.streamsb} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
+        <Link href={data?.streamsb ?? "#"} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
           <TvMinimalPlayIcon />
           <div>Streamsb</div>
         </Link>
-        <Link href={data.xstreamcdn} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
+        <Link href={data?.xstreamcdn ?? "#"} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
           <TvMinimalPlayIcon />
           <div>Xstreamcdn</div>
         </Link>
-        <Link href={data.mixdrop} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
+        <Link href={data?.mixdrop ?? "#"} target='_blank' className='flex dark:bg-[#333333] dark:hover:bg-gray-500 bg-white mt-5 p-3 rounded-md gap-x-2 hover:bg-slate-100 font-[family-name:var(--font-gilroy-medium)]'>
           <TvMinimalPlayIcon />
           <div>Mixdrop</div>
         </Link>
