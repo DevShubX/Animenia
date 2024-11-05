@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
   try {
     let name = req.nextUrl.searchParams.get("name")!;
 
-    name = encodeURIComponent(name.trim());
+    name = encodeURIComponent(name.trim()); //Encode name component only
 
     let result: any[] = [];
     const { data } = await axios.get(link + name);

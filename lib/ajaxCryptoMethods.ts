@@ -1,7 +1,7 @@
 import * as CryptoJS from "crypto-js"
 
 const keys = {
-    key: CryptoJS.enc.Utf8.parse('37911490979715163134003223491201'),
+    key: CryptoJS.enc.Utf8.parse('37911490979715163134003223491201'), //decrypting the key
     secondKey: CryptoJS.enc.Utf8.parse('54674138327930866480207815084989'),
     iv: CryptoJS.enc.Utf8.parse('3134003223491201'),
 }

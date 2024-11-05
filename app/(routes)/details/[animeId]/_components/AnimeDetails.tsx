@@ -13,15 +13,52 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FaStar, FaYoutube } from "react-icons/fa";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 interface AnimeDetailProps {
   gogoData: any;
   anilistData: any;
-  animeId: string,
+  animeId: string;
 }
+
+const AddtoListColors: any = {
+  thrown: "text-red-600",
+  visible: "text-blue-600",
+  currently_watching: "text-yellow-600",
+  will_watch: "text-purple-600",
+};
 
 const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
   const [showMore, setShowMore] = useState<boolean>(false);
+  const [animeStatus, setAnimeStatus] = useState<string>("");
+
+  const updateAnimeStatus = async (status: string) => {
+    const animeData = {
+      anilistId: anilistData.id,
+      genres: anilistData.genres,
+      episodesNumber: anilistData.numOfEpisodes,
+      anilistTitle: anilistData.title,
+      coverImage: anilistData.coverImage,
+      status: status,
+    };
+
+    const promise = axios.patch("/api/anime/animeStatus",animeData);
+    toast.promise(promise, {
+      success: "Updated Status Successfully",
+      loading: "Updating Status",
+      error: "Eerror Updating Status",
+    }).then((response) => {
+        console.log(response)
+    })
+  };
 
   return (
     <div className="p-6 max-md:p-3 flex flex-shrink-0 gap-x-5 max-lg:block">
@@ -35,10 +72,39 @@ const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
               Anime
             </h1>
           </div>
-          <div className="flex text-red-600 items-center align-middle gap-x-2 font-[family-name:var(--font-gilroy-medium)]">
-            <div>Add to List</div>
-            <ChevronDown />
-          </div>
+          <Select
+            value={animeStatus}
+            onValueChange={(value) => {
+              setAnimeStatus(value)
+              updateAnimeStatus(value)
+            }}
+          >
+            <SelectTrigger
+              className={cn(
+                "w-min border-none outline-none ring-0 focus:ring-0 shadow-none font-[family-name:var(--font-gilroy-medium)] text-red-600 ",
+                AddtoListColors[animeStatus]
+              )}
+            >
+              <SelectValue placeholder="Add to List" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="thrown" className="text-red-600">
+                Thrown
+              </SelectItem>
+              <SelectItem value="visible" className="text-blue-600">
+                Visible
+              </SelectItem>
+              <SelectItem
+                value="currently_watching"
+                className="text-yellow-600"
+              >
+                Currently Watching
+              </SelectItem>
+              <SelectItem value="will_watch" className="text-purple-600">
+                Will Watch
+              </SelectItem>
+            </SelectContent>
+          </Select>
         </div>
         <div className="flex mt-3 gap-x-5 max-md:flex-col">
           <div className="flex flex-col w-[250px] max-md:w-full max-md:items-center">
@@ -93,7 +159,11 @@ const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
           </div>
         </div>
         <div>
-          <EpisodeSection anilistData={anilistData} gogoData={gogoData} animeId={animeId}/>
+          <EpisodeSection
+            anilistData={anilistData}
+            gogoData={gogoData}
+            animeId={animeId}
+          />
         </div>
         <div>
           <div className="text-2xl text-red-600 font-[family-name:var(--font-gilroy-bold)] mt-6 ">
@@ -123,7 +193,13 @@ const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
           </div>
           <div className="flex overflow-scroll gap-x-5 mt-2">
             {anilistData.recommendations.edges.map((item: any) => (
-              <Link href={`/search?q=${item.node.mediaRecommendation.title.romaji ?? item.node.mediaRecommendation.title.userpreferred}`} className="flex-shrink-0 w-[160px]">
+              <Link
+                href={`/search?q=${
+                  item.node.mediaRecommendation.title.romaji ??
+                  item.node.mediaRecommendation.title.userpreferred
+                }`}
+                className="flex-shrink-0 w-[160px]"
+              >
                 <Image
                   src={item.node.mediaRecommendation.coverImage.large}
                   alt="image"
@@ -132,7 +208,8 @@ const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
                   className="w-[160px] h-[235px] rounded-md"
                 />
                 <div className="text-red-400 truncate font-[family-name:var(--font-gilroy-bold)]">
-                  {item.node.mediaRecommendation.title.romaji ?? item.node.mediaRecommendation.title.userpreferred}
+                  {item.node.mediaRecommendation.title.romaji ??
+                    item.node.mediaRecommendation.title.userpreferred}
                 </div>
               </Link>
             ))}

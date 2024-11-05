@@ -71,13 +71,15 @@ const Navbar = () => {
           <ModeToggle />
         </div>
         <Bookmark  className="max-sm:hidden"/>
-        <Image
-          src={currentUser?.photoURL!}
-          alt="pfp"
-          width={100}
-          height={100}
-          className="w-10 h-10 rounded-[50%] border-2 border-purple-500 object-cover p-[1px]"
-        />
+        <Link href={"/account"}>
+          <Image
+            src={currentUser?.photoURL!}
+            alt="pfp"
+            width={100}
+            height={100}
+            className="w-10 h-10 rounded-[50%] border-2 border-purple-500 object-cover p-[1px]"
+            />
+        </Link>
         <MobileNav />
       </div>
     </nav>

@@ -10,19 +10,21 @@ interface ContextProviderProps{
 
 
 const StateContext = createContext<ContextProviderProps>({
-    currentUser : null,
+    currentUser : null,  //object accesible across my app
 });
 
 
 const ContextProvider = ({children}:{children:React.ReactNode}) => {
-    
 
-    const pathname = usePathname();
+    const pathname = usePathname(); //Read Current URL's Pathname
     const router = useRouter();
 
     const [currentUser,setCurrentUser] = useState<User | null>(null);
 
     useEffect(()=>{
+        
+        //onAuthStateChanged : listen to changes in user authentication in real time
+
         onAuthStateChanged(auth,(user)=>{
             setCurrentUser(user);
             if(user){
