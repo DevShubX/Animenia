@@ -22,23 +22,30 @@ import {
 } from "@/components/ui/select";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { useStateContext } from "@/GlobalContext/ContextProvider";
+import { IoBookmarkOutline } from "react-icons/io5";
 
 interface AnimeDetailProps {
   gogoData: any;
   anilistData: any;
   animeId: string;
+  status: string;
 }
 
-const AddtoListColors: any = {
+export const AddtoListColors: any = {
   thrown: "text-red-600",
-  visible: "text-blue-600",
+  viewed: "text-blue-600",
   currently_watching: "text-yellow-600",
   will_watch: "text-purple-600",
 };
 
-const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
+const AnimeDetails = ({ gogoData, anilistData, animeId, status }: AnimeDetailProps) => {
+  const {currentUser} = useStateContext();
+  const router = useRouter();
+
   const [showMore, setShowMore] = useState<boolean>(false);
-  const [animeStatus, setAnimeStatus] = useState<string>("");
+  const [animeStatus, setAnimeStatus] = useState<string>(status || '');
 
   const updateAnimeStatus = async (status: string) => {
     const animeData = {
@@ -48,15 +55,16 @@ const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
       anilistTitle: anilistData.title,
       coverImage: anilistData.coverImage,
       status: status,
+      userId: currentUser?.uid
     };
 
     const promise = axios.patch("/api/anime/animeStatus",animeData);
     toast.promise(promise, {
       success: "Updated Status Successfully",
       loading: "Updating Status",
-      error: "Eerror Updating Status",
-    }).then((response) => {
-        console.log(response)
+      error: "Error Updating Status",
+    }).then(() => {
+        router.refresh();
     })
   };
 
@@ -91,8 +99,8 @@ const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
               <SelectItem value="thrown" className="text-red-600">
                 Thrown
               </SelectItem>
-              <SelectItem value="visible" className="text-blue-600">
-                Visible
+              <SelectItem value="viewed" className="text-blue-600">
+                Viewed
               </SelectItem>
               <SelectItem
                 value="currently_watching"
@@ -108,13 +116,18 @@ const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
         </div>
         <div className="flex mt-3 gap-x-5 max-md:flex-col">
           <div className="flex flex-col w-[250px] max-md:w-full max-md:items-center">
-            <Image
-              src={anilistData.coverImage.large}
-              alt="img"
-              width={200}
-              height={100}
-              className="rounded-[10px] h-[350px] w-[250px]"
-            />
+            <div className="relative">
+              <Image
+                src={anilistData.coverImage.large}
+                alt="img"
+                width={200}
+                height={100}
+                className="rounded-[10px] h-[350px] w-[250px]"
+              />
+              <div className="bg-white/90 rounded-lg absolute top-4 right-4 p-2 ">
+                <IoBookmarkOutline className="text-red-600 text-2xl" />
+              </div>
+            </div>
             <Link
               href={`https://www.youtube.com/watch?v=${anilistData.trailer?.id}`}
               target="_blank"

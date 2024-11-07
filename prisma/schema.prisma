@@ -15,7 +15,8 @@ datasource db {
 
 model AnimeList{
   id String @id @default(uuid())
-  anilistId String @unique
+  anilistId Int @unique
+  userId String
   genres String[]
   episodesNumber Int
   anilistTitle Json
