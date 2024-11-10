@@ -31,9 +31,10 @@ const ContinueWatching = () => {
 
   const getContinueWatchingAnime = () => {
     setIsLoading(true)
-    onValue(dbRef, (snapshot) => {
+    onValue(dbRef, (snapshot) => {     // Snapshot:  (Firebase object) How data is stored in firebase 
         if (snapshot.exists()) {
-            let anime = snapshot.val();
+          console.log(snapshot)
+            let anime = snapshot.val();   // Val() : returns data in its initial form from DataSnapshot obj.
             setAnimeArray(anime);
         }
     });

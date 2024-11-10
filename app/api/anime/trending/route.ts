@@ -33,6 +33,7 @@ export async function GET(req: NextRequest) {
         }
       );
     });
+    // console.log(response)
     if (response === undefined || response === null) {
       return NextResponse.json(
         {

@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
     let result = {};
     const { data } = await axios.get(requestURL);
-    const $ = cheerio.load(data);
+    const $ = cheerio.load(data);   //cheerio.load(data) loads HTML content stored in "data" in cheerio
 
     let title = $(".anime_info_body_bg").find("h1").text();
     let image = $(".anime_info_body_bg").find("img[src]").attr("src");

@@ -13,15 +13,100 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FaStar, FaYoutube } from "react-icons/fa";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { useStateContext } from "@/GlobalContext/ContextProvider";
+import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
+import { WishList } from "@prisma/client";
 
 interface AnimeDetailProps {
   gogoData: any;
   anilistData: any;
-  animeId: string,
+  animeId: string;
+  status: string;
+  wishlist: WishList;
 }
 
-const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
+export const AddtoListColors: any = {
+  thrown: "text-red-600",
+  viewed: "text-blue-600",
+  currently_watching: "text-yellow-600",
+  will_watch: "text-purple-600",
+};
+
+const AnimeDetails = ({
+  gogoData,
+  anilistData,
+  animeId,
+  status,
+  wishlist,
+}: AnimeDetailProps) => {
+  const { currentUser } = useStateContext();
+  const router = useRouter();
+
   const [showMore, setShowMore] = useState<boolean>(false);
+  const [animeStatus, setAnimeStatus] = useState<string>(status || "");
+
+  const updateAnimeStatus = async (status: string) => {
+    const animeData = {
+      anilistId: anilistData.id,
+      genres: anilistData.genres,
+      episodesNumber: anilistData.numOfEpisodes,
+      anilistTitle: anilistData.title,
+      coverImage: anilistData.coverImage,
+      status: status,
+      userId: currentUser?.uid,
+    };
+
+    const promise = axios.patch("/api/anime/animeStatus", animeData);
+    toast
+      .promise(promise, {
+        success: "Updated Status Successfully",
+        loading: "Updating Status",
+        error: "Error Updating Status",
+      })
+      .then(() => {
+        router.refresh();
+      });
+  };
+
+  const updateWishList = async () => {
+    const animeData = {
+      anilistId: anilistData.id,
+      animeId: animeId,
+      anilistTitle: anilistData.title,
+      coverImage: anilistData.coverImage,
+      userId: currentUser?.uid,
+    };
+
+    if (wishlist) {
+      const removePromise = axios.post("/api/anime/wishList/remove", animeData);
+      toast.promise(removePromise, {
+        success: "Removed from Wishlist",
+        loading: "Updating Wishlist",
+        error: "Error Updating Wishlist",
+      });
+      
+    }
+    else{
+      const addPromise = axios.post("/api/anime/wishList/add", animeData);
+      toast.promise(addPromise, {
+        success: "Wishlist Updated",
+        loading: "Updating Wishlist",
+        error: "Error Updating Wishlist",
+      });
+    }
+
+    router.refresh();
+  };
 
   return (
     <div className="p-6 max-md:p-3 flex flex-shrink-0 gap-x-5 max-lg:block">
@@ -35,20 +120,61 @@ const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
               Anime
             </h1>
           </div>
-          <div className="flex text-red-600 items-center align-middle gap-x-2 font-[family-name:var(--font-gilroy-medium)]">
-            <div>Add to List</div>
-            <ChevronDown />
-          </div>
+          <Select
+            value={animeStatus}
+            onValueChange={(value) => {
+              setAnimeStatus(value);
+              updateAnimeStatus(value);
+            }}
+          >
+            <SelectTrigger
+              className={cn(
+                "w-min border-none outline-none ring-0 focus:ring-0 shadow-none font-[family-name:var(--font-gilroy-medium)] text-red-600 ",
+                AddtoListColors[animeStatus]
+              )}
+            >
+              <SelectValue placeholder="Add to List" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="thrown" className="text-red-600">
+                Thrown
+              </SelectItem>
+              <SelectItem value="viewed" className="text-blue-600">
+                Viewed
+              </SelectItem>
+              <SelectItem
+                value="currently_watching"
+                className="text-yellow-600"
+              >
+                Currently Watching
+              </SelectItem>
+              <SelectItem value="will_watch" className="text-purple-600">
+                Will Watch
+              </SelectItem>
+            </SelectContent>
+          </Select>
         </div>
         <div className="flex mt-3 gap-x-5 max-md:flex-col">
           <div className="flex flex-col w-[250px] max-md:w-full max-md:items-center">
-            <Image
-              src={anilistData.coverImage.large}
-              alt="img"
-              width={200}
-              height={100}
-              className="rounded-[10px] h-[350px] w-[250px]"
-            />
+            <div className="relative">
+              <Image
+                src={anilistData.coverImage.large}
+                alt="img"
+                width={200}
+                height={100}
+                className="rounded-[10px] h-[350px] w-[250px]"
+              />
+              <div
+                className="bg-white/90 rounded-lg absolute top-4 right-4 p-2 cursor-pointer"
+                onClick={updateWishList}
+              >
+                {wishlist ? (
+                  <IoBookmark className="text-red-600 text-2xl" />
+                ) : (
+                  <IoBookmarkOutline className="text-red-600 text-2xl" />
+                )}
+              </div>
+            </div>
             <Link
               href={`https://www.youtube.com/watch?v=${anilistData.trailer?.id}`}
               target="_blank"
@@ -93,7 +219,11 @@ const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
           </div>
         </div>
         <div>
-          <EpisodeSection anilistData={anilistData} gogoData={gogoData} animeId={animeId}/>
+          <EpisodeSection
+            anilistData={anilistData}
+            gogoData={gogoData}
+            animeId={animeId}
+          />
         </div>
         <div>
           <div className="text-2xl text-red-600 font-[family-name:var(--font-gilroy-bold)] mt-6 ">
@@ -123,7 +253,13 @@ const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
           </div>
           <div className="flex overflow-scroll gap-x-5 mt-2">
             {anilistData.recommendations.edges.map((item: any) => (
-              <Link href={`/search?q=${item.node.mediaRecommendation.title.romaji ?? item.node.mediaRecommendation.title.userpreferred}`} className="flex-shrink-0 w-[160px]">
+              <Link
+                href={`/search?q=${
+                  item.node.mediaRecommendation.title.romaji ??
+                  item.node.mediaRecommendation.title.userpreferred
+                }`}
+                className="flex-shrink-0 w-[160px]"
+              >
                 <Image
                   src={item.node.mediaRecommendation.coverImage.large}
                   alt="image"
@@ -132,7 +268,8 @@ const AnimeDetails = ({ gogoData, anilistData, animeId }: AnimeDetailProps) => {
                   className="w-[160px] h-[235px] rounded-md"
                 />
                 <div className="text-red-400 truncate font-[family-name:var(--font-gilroy-bold)]">
-                  {item.node.mediaRecommendation.title.romaji ?? item.node.mediaRecommendation.title.userpreferred}
+                  {item.node.mediaRecommendation.title.romaji ??
+                    item.node.mediaRecommendation.title.userpreferred}
                 </div>
               </Link>
             ))}

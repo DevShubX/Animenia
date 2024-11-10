@@ -6,7 +6,7 @@ const baseUrl = "https://graphql.anilist.co";
 
 export async function GET(req: NextRequest) {
   try {
-    const page = req.nextUrl.searchParams.get("page")!;
+    const page = req.nextUrl.searchParams.get("page")!; // Get info from URL's query parameter
     const count = req.nextUrl.searchParams.get("count")!;
     const response:any = await axios({
       url: baseUrl,
