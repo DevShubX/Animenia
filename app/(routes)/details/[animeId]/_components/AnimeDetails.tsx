@@ -24,13 +24,15 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useStateContext } from "@/GlobalContext/ContextProvider";
-import { IoBookmarkOutline } from "react-icons/io5";
+import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
+import { WishList } from "@prisma/client";
 
 interface AnimeDetailProps {
   gogoData: any;
   anilistData: any;
   animeId: string;
   status: string;
+  wishlist: WishList;
 }
 
 export const AddtoListColors: any = {
@@ -40,12 +42,18 @@ export const AddtoListColors: any = {
   will_watch: "text-purple-600",
 };
 
-const AnimeDetails = ({ gogoData, anilistData, animeId, status }: AnimeDetailProps) => {
-  const {currentUser} = useStateContext();
+const AnimeDetails = ({
+  gogoData,
+  anilistData,
+  animeId,
+  status,
+  wishlist,
+}: AnimeDetailProps) => {
+  const { currentUser } = useStateContext();
   const router = useRouter();
 
   const [showMore, setShowMore] = useState<boolean>(false);
-  const [animeStatus, setAnimeStatus] = useState<string>(status || '');
+  const [animeStatus, setAnimeStatus] = useState<string>(status || "");
 
   const updateAnimeStatus = async (status: string) => {
     const animeData = {
@@ -55,17 +63,49 @@ const AnimeDetails = ({ gogoData, anilistData, animeId, status }: AnimeDetailPro
       anilistTitle: anilistData.title,
       coverImage: anilistData.coverImage,
       status: status,
-      userId: currentUser?.uid
+      userId: currentUser?.uid,
     };
 
-    const promise = axios.patch("/api/anime/animeStatus",animeData);
-    toast.promise(promise, {
-      success: "Updated Status Successfully",
-      loading: "Updating Status",
-      error: "Error Updating Status",
-    }).then(() => {
+    const promise = axios.patch("/api/anime/animeStatus", animeData);
+    toast
+      .promise(promise, {
+        success: "Updated Status Successfully",
+        loading: "Updating Status",
+        error: "Error Updating Status",
+      })
+      .then(() => {
         router.refresh();
-    })
+      });
+  };
+
+  const updateWishList = async () => {
+    const animeData = {
+      anilistId: anilistData.id,
+      animeId: animeId,
+      anilistTitle: anilistData.title,
+      coverImage: anilistData.coverImage,
+      userId: currentUser?.uid,
+    };
+
+    if (wishlist) {
+      const removePromise = axios.post("/api/anime/wishList/remove", animeData);
+      toast.promise(removePromise, {
+        success: "Removed from Wishlist",
+        loading: "Updating Wishlist",
+        error: "Error Updating Wishlist",
+      });
+      
+    }
+    else{
+      const addPromise = axios.post("/api/anime/wishList/add", animeData);
+      toast.promise(addPromise, {
+        success: "Wishlist Updated",
+        loading: "Updating Wishlist",
+        error: "Error Updating Wishlist",
+      });
+    }
+
+    router.refresh();
   };
 
   return (
@@ -83,8 +123,8 @@ const AnimeDetails = ({ gogoData, anilistData, animeId, status }: AnimeDetailPro
           <Select
             value={animeStatus}
             onValueChange={(value) => {
-              setAnimeStatus(value)
-              updateAnimeStatus(value)
+              setAnimeStatus(value);
+              updateAnimeStatus(value);
             }}
           >
             <SelectTrigger
@@ -124,8 +164,15 @@ const AnimeDetails = ({ gogoData, anilistData, animeId, status }: AnimeDetailPro
                 height={100}
                 className="rounded-[10px] h-[350px] w-[250px]"
               />
-              <div className="bg-white/90 rounded-lg absolute top-4 right-4 p-2 ">
-                <IoBookmarkOutline className="text-red-600 text-2xl" />
+              <div
+                className="bg-white/90 rounded-lg absolute top-4 right-4 p-2 cursor-pointer"
+                onClick={updateWishList}
+              >
+                {wishlist ? (
+                  <IoBookmark className="text-red-600 text-2xl" />
+                ) : (
+                  <IoBookmarkOutline className="text-red-600 text-2xl" />
+                )}
               </div>
             </div>
             <Link

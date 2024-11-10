@@ -30,3 +30,12 @@ enum Status{
   currently_watching
   will_watch
 }
+
+model WishList{
+  id String @id @default(uuid())
+  anilistId Int @unique
+  animeId String
+  userId String
+  anilistTitle Json
+  coverImage Json
+}

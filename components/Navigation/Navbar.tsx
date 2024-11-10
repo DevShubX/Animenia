@@ -9,7 +9,7 @@ import MobileNav from "./MobileNav";
 import { ModeToggle } from "../Theme/ThemeToggle";
 
 const Navbar = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [searchState, setSearchState] = useState<string>('')
   const { currentUser } = useStateContext();
@@ -70,7 +70,9 @@ const Navbar = () => {
         <div className="max-sm:hidden">
           <ModeToggle />
         </div>
-        <Bookmark  className="max-sm:hidden"/>
+        <Link href={`/wishlist?userId=${currentUser?.uid}`} className="max-sm:hidden cursor-pointer">
+          <Bookmark />
+        </Link>
         <Link href={"/account"}>
           <Image
             src={currentUser?.photoURL!}

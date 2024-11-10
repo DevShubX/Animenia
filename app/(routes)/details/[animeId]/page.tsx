@@ -26,6 +26,13 @@ const AnimeDetailsPage = async ({
     },
   });
 
+  const wishList = await db.wishList.findUnique({
+    where: {
+      userId:searchParams.userId,
+      anilistId: anilistId,
+    },
+  })
+
   return (
     <div>
       <AnimeDetails
@@ -33,6 +40,7 @@ const AnimeDetailsPage = async ({
         anilistData={response.data.result.anilistResponse}
         animeId={params.animeId}
         status={animeStatus?.status!}
+        wishlist={wishList!}
       />
     </div>
   );
