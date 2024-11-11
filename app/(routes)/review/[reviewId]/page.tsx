@@ -5,7 +5,7 @@ import React from "react";
 
 const ReviewPage = async ({ params }: { params: { reviewId: string } }) => {
   const response = await axios.get(
-    `http://localhost:3000/api/anime/review/${params.reviewId}`
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/anime/review/${params.reviewId}`
   );
   const anilistData = response.data.result.data.Page.reviews[0];
 
