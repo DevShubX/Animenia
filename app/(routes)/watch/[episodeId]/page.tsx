@@ -19,7 +19,7 @@ const AnimeWatchPage = async ({
 
   return (
     <div>
-      <AnimeWatch data={response.data.result} anilistData={response_2.data.result.anilistResponse} gogoData={response_2.data.result.gogoResponse} animeId={searchParams?.animeId!} />
+      <AnimeWatch data={response.data.result} anilistData={response_2.data.result.anilistResponse} animeId={searchParams?.animeId!} />
     </div>
   );
 };

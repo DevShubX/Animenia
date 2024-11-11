@@ -36,7 +36,6 @@ const AnimeDetailsPage = async ({
   return (
     <div>
       <AnimeDetails
-        gogoData={response.data.result.gogoResponse}
         anilistData={response.data.result.anilistResponse}
         animeId={params.animeId}
         status={animeStatus?.status!}

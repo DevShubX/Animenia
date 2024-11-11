@@ -8,11 +8,10 @@ import EpisodeSection from '@/components/Anime/EpisodeSection'
 interface AnimeWatchProps{
   data: any,
   anilistData: any,
-  gogoData: any,
   animeId: any,
 }
 
-const AnimeWatch = ({data, anilistData, gogoData, animeId} : AnimeWatchProps) => {
+const AnimeWatch = ({data, anilistData, animeId} : AnimeWatchProps) => {
 
   return (
     <div className='p-6 flex gap-x-5 max-lg:flex-col'>
@@ -25,7 +24,7 @@ const AnimeWatch = ({data, anilistData, gogoData, animeId} : AnimeWatchProps) =>
           </div>
         </div>
         <div>
-          <EpisodeSection anilistData={anilistData} gogoData={gogoData} animeId={animeId} />
+          <EpisodeSection anilistData={anilistData}  animeId={animeId} />
         </div>
       </div>
       <div className='w-full '>

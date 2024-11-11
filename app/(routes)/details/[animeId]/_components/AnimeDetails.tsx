@@ -28,7 +28,6 @@ import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
 import { WishList } from "@prisma/client";
 
 interface AnimeDetailProps {
-  gogoData: any;
   anilistData: any;
   animeId: string;
   status: string;
@@ -43,7 +42,6 @@ export const AddtoListColors: any = {
 };
 
 const AnimeDetails = ({
-  gogoData,
   anilistData,
   animeId,
   status,
@@ -219,7 +217,6 @@ const AnimeDetails = ({
         <div>
           <EpisodeSection
             anilistData={anilistData}
-            gogoData={gogoData}
             animeId={animeId}
           />
         </div>
