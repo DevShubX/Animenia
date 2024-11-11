@@ -38,8 +38,8 @@ const AnimeReviewPage = () => {
       {isLoading && <ReviewSkeleton />}
       {!isLoading && (
         <div className="grid grid-cols-5 gap-8 my-5 max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
-          {reviewAnime.map((item: any) => (
-            <Link href={`review/${item.id}`}>
+          {reviewAnime.map((item: any , index:number) => (
+            <Link key={index} href={`review/${item.id}`}>
               <Image
                 src={item?.media?.bannerImage ?? '/static/noImage.jfif'} 
                 alt="Review"

@@ -12,7 +12,7 @@ const ArtPlayerAnime = ({sources} : ArtPlayerAnimeProps) => {
     let reverseSources = [...sources.sources].reverse()
     reverseSources = reverseSources.filter((item) => item.quality !== 'default')
 
-    let src = `https://cors.menifi.workers.dev/${reverseSources[0].url}`
+    const src = `https://cors.menifi.workers.dev/${reverseSources[0].url}`
     const artRef = useRef<any>()
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const ArtPlayerAnime = ({sources} : ArtPlayerAnimeProps) => {
                 crossOrigin: 'anonymous'
             },
             quality:reverseSources.map((item:any) => {
-                let container:any = {};
+                const container:any = {};
                 container['html'] = item.quality;
                 container['url'] = `https://cors.menifi.workers.dev/${item.url}`;
                 return container;

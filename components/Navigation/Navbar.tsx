@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useStateContext } from "@/GlobalContext/ContextProvider";
-import { Bookmark, Moon, Search, X } from "lucide-react";
+import { Bookmark, Search, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import MobileNav from "./MobileNav";
 import { ModeToggle } from "../Theme/ThemeToggle";

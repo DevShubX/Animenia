@@ -7,8 +7,8 @@ const goload_stream_url = "https://goload.pro/streaming.php"
 const USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"
 
 export async function scrapeSourceFiles(id:string){
-    let sources:any[] = []
-    let sources_bk:any[] = []
+    const sources:any[] = []
+    const sources_bk:any[] = []
     try{
         let epPage, server, $, serverUrl
 

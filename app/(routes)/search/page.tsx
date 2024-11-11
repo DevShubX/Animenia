@@ -34,8 +34,8 @@ const SearchPage = () => {
         <SearchSkeleton />
       ) : (
         <div className="grid grid-cols-7 gap-y-5 mt-5 max-2xl:grid-cols-6 max-xl:grid-cols-5 max-lg:grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-2">
-          {searchResult.map((item) => (
-            <Link href={`/details/${item.animeId}?userId=${currentUser?.uid}`}>
+          {searchResult.map((item,index) => (
+            <Link key={index} href={`/details/${item.animeId}?userId=${currentUser?.uid}`}>
               <Image
                 className="h-[300px] rounded-[10px] object-cover max-md:h-[210px] max-md:w-[160px]"
                 src={item.image}

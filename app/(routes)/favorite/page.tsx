@@ -39,8 +39,8 @@ const FavoriteAnimePage = () => {
       {isLoading && <SearchSkeleton />}
       {!isLoading && (
         <div className="grid grid-cols-7 max-xl:grid-cols-6 max-lg:grid-cols-5 max-md:grid-cols-4 max-sm:grid-cols-3 max-[400px]:grid-cols-2 gap-5 mt-5">
-          {favoriteAnime.map((item) => (
-            <Link href={`/search?q=${item.title.romaji ?? item.title.userPreferred}`}>
+          {favoriteAnime.map((item,index) => (
+            <Link key={index} href={`/search?q=${item.title.romaji ?? item.title.userPreferred}`}>
               <Image
                 src={item.coverImage.large}
                 alt="favorite"

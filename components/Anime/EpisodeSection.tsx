@@ -7,11 +7,10 @@ import React from "react";
 
 interface EpisodeSectionProps {
   anilistData: any;
-  gogoData: any;
   animeId: string,
 }
 
-const EpisodeSection = ({ anilistData, gogoData, animeId }: EpisodeSectionProps) => {
+const EpisodeSection = ({ anilistData, animeId }: EpisodeSectionProps) => {
     const { currentUser } = useStateContext();
 
     const updateContineWatching = (animeWatchLink:string , animeEpisodeId:string) => {

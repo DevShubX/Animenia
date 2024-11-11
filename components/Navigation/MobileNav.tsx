@@ -18,13 +18,12 @@ import Image from "next/image";
 import { ModeToggle } from "../Theme/ThemeToggle";
 import { useStateContext } from "@/GlobalContext/ContextProvider";
 
-
 const MobileNav = () => {
   const router = useRouter();
   const { currentUser } = useStateContext();
   const [searchState, setSearchState] = useState<string>("");
   const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
-  
+
   const RouteSidebar_1 = [
     {
       id: 1,
@@ -89,8 +88,9 @@ const MobileNav = () => {
           />
         </div>
         <div className="flex flex-col gap-y-6 mt-6">
-          {RouteSidebar_1.map((item) => (
+          {RouteSidebar_1.map((item, index) => (
             <Link
+              key={index}
               href={item.href}
               className="flex items-center gap-4 font-[family-name:var(--font-gilroy-medium)]"
               onClick={() => setIsSheetOpen(false)}

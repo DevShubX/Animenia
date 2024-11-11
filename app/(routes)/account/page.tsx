@@ -149,8 +149,8 @@ const AccountsPage = () => {
         <div>
           <SliderNav title="Anime List" icon={FolderClosedIcon} />
           <div>
-            {animeList.map((item) => (
-              <div className="flex bg-white dark:bg-[#363636] my-3 p-2 rounded-lg justify-between ">
+            {animeList.map((item,index) => (
+              <div key={index} className="flex bg-white dark:bg-[#363636] my-3 p-2 rounded-lg justify-between ">
                 <div className="flex items-start">
                   <Image
                     src={(item.coverImage as any)["large"]!}
