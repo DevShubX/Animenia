@@ -9,8 +9,8 @@ const list_episodes_url = "https://ajax.gogocdn.net/ajax/load-list-episode";
 const anifyUrl = "https://api.anify.tv";
 
 export async function GET(req: NextRequest) {
+  const id = req.nextUrl.searchParams.get("id")!;
   try {
-    const id = req.nextUrl.searchParams.get("id")!;
     const requestURL = `${url}/category/${id}`;
     const animeId = id.replace("-dub", "").replace("-sub", ""); //Extracting AnimeId to be checked on AniList
     console.log(animeId);

@@ -3,8 +3,8 @@ import { AnimeList } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest){
+  const userId = req.nextUrl.searchParams.get("userId")!;
   try{
-    const userId = req.nextUrl.searchParams.get("userId")!;
 
     const animeList = await db.animeList.findMany({
       where:{
@@ -47,9 +47,9 @@ export async function PATCH(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
+  const anilistId = req.nextUrl.searchParams.get("anilistId")!;
+  const userId = req.nextUrl.searchParams.get("userId")!;
   try{
-    const anilistId = req.nextUrl.searchParams.get("anilistId")!;
-    const userId = req.nextUrl.searchParams.get("userId")!;
     await db.animeList.delete({
       where:{
         anilistId:parseInt(anilistId),

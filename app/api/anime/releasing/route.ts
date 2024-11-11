@@ -5,8 +5,8 @@ import { NextRequest, NextResponse } from "next/server";
 const baseUrl = "https://graphql.anilist.co";
 
 export async function GET(req: NextRequest) {
+  const status = req.nextUrl.searchParams.get("status")!;
   try {
-    const status = req.nextUrl.searchParams.get("status")!;
     const response: any = await axios({
       url: baseUrl,
       method: "POST",

@@ -9,8 +9,8 @@ const iframeLink = (episodeId:string) =>
 
 
 export async function GET(req:NextRequest){
+    const epiId = req.nextUrl.searchParams.get("episodeId")!
     try{
-        const epiId = req.nextUrl.searchParams.get("episodeId")!
         const episodeId = `${url}/${epiId}`
         let sources:any = {}
 

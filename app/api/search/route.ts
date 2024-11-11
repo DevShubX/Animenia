@@ -7,8 +7,8 @@ const BASE_URL = "https://gogoanime3.net";
 const link = `${BASE_URL}//search.html?keyword=`;
 
 export async function GET(req: NextRequest) {
+  let name = req.nextUrl.searchParams.get("name")!;
   try {
-    let name = req.nextUrl.searchParams.get("name")!;
 
     name = encodeURIComponent(name.trim()); //Encode name component only
 
