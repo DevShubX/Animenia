@@ -22,7 +22,7 @@ const EpisodeSection = ({ anilistData, animeId }: EpisodeSectionProps) => {
         }
         const db = database;
         const dbRef = ref(db,`users/${currentUser?.uid}/continueWatching/animes`);
-        let arr: any[] = [];
+        const arr: any[] = [];
         get(ref(db,`users/${currentUser?.uid}/continueWatching/animes/anime_arr`)).then(async (snapshot) => {
             if(snapshot.exists()){
                 snapshot.forEach((snap) => {
