@@ -13,7 +13,7 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const AnimeCarousel = () => {
-  const [carouselData, setCarouselData] = useState<any[]>([]);
+  const [carouselData, setCarouselData] = useState<object[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const AnimeCarousel = () => {
         }}
       >
         {carouselData?.map(
-          (item: any, index: any) =>
+          (item: any) =>
             (item.bannerImage !== null || undefined || "") && (
               <SwiperSlide key={item.id}>
                 <div>

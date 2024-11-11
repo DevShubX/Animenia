@@ -37,7 +37,7 @@ const SignInPage = () => {
             setIsSigningIn(false);
           });
       }
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong!");
     }
   };

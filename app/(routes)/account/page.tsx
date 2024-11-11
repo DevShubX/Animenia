@@ -25,7 +25,6 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/methods";
 import { AddtoListColors } from "../details/[animeId]/_components/AnimeDetails";
-import Link from "next/link";
 import { auth } from "@/firebase/firebase";
 
 const AccountsPage = () => {

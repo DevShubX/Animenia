@@ -9,7 +9,7 @@ import SliderSkeleton from "@/components/Skeletons/SliderSkeleton";
 import { Image } from "lucide-react";
 
 const PopularAnimeSlider = () => {
-  const [popularAnime, setPopularAnime] = useState<any[]>([]);
+  const [popularAnime, setPopularAnime] = useState<object[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {

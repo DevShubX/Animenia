@@ -13,7 +13,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 
 const ContinueWatching = () => {
   const { currentUser } = useStateContext();
-  const [animeArray, setAnimeArray] = useState<any[]>([]);
+  const [animeArray, setAnimeArray] = useState<object[]>([]);
   const [isLoading , setIsLoading] = useState<boolean>(false);
 
   const dbRef = ref(
@@ -34,19 +34,19 @@ const ContinueWatching = () => {
     onValue(dbRef, (snapshot) => {     // Snapshot:  (Firebase object) How data is stored in firebase 
         if (snapshot.exists()) {
           console.log(snapshot)
-            let anime = snapshot.val();   // Val() : returns data in its initial form from DataSnapshot obj.
+            const anime = snapshot.val();   // Val() : returns data in its initial form from DataSnapshot obj.
             setAnimeArray(anime);
         }
     });
     onChildRemoved(dbRef,(snapshot) => {
-        let anime = snapshot.val();
+        const anime = snapshot.val();
         setAnimeArray(anime);
     })
     setIsLoading(false)
   };
 
   const removeContinueWatching = (index: number) => {
-    let newContinueWatching = animeArray;
+    const newContinueWatching = animeArray;
     newContinueWatching.splice(index, 1);
     setAnimeArray(newContinueWatching);
     set(ref(database, `users/${currentUser?.uid}/continueWatching/animes`), {
@@ -88,7 +88,7 @@ const ContinueWatching = () => {
                 },
               }}
             >
-              {animeArray.map((item: any, index: any) => (
+              {animeArray.map((item: any, index: number) => (
                 <SwiperSlide key={item.id}>
                   <Link
                     href={item.animeWatchLink}
