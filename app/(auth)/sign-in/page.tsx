@@ -76,7 +76,7 @@ const SignInPage = () => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 outline-none font-[family-name:var(--font-gilroy-medium)]"
+            className=" dark:bg-[#121212] w-full p-2 outline-none font-[family-name:var(--font-gilroy-medium)]"
           />
         </div>
         <div className="dark:bg-[#121212] bg-white flex items-center p-2 border rounded-lg">
@@ -89,7 +89,7 @@ const SignInPage = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 outline-none font-[family-name:var(--font-gilroy-medium)]"
+            className="dark:bg-[#121212] w-full p-2 outline-none font-[family-name:var(--font-gilroy-medium)]"
           />
           <span onClick={() => setIsPasswordVisible(!isPasswordVisible)}>
             {isPasswordVisible && (

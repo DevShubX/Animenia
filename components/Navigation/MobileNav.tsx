@@ -15,37 +15,41 @@ import {
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { ModeToggle } from "../Theme/ThemeToggle";
+import { useStateContext } from "@/GlobalContext/ContextProvider";
 
-const RouteSidebar_1 = [
-  {
-    id: 1,
-    icon: HomeIcon,
-    name: "Home",
-    href: "/",
-  },
-  {
-    id: 2,
-    icon: BookmarkIcon,
-    name: "Wishlist",
-    href: "/wishlist",
-  },
-  {
-    id: 3,
-    icon: NewspaperIcon,
-    name: "Reviews",
-    href: "/review?page=1",
-  },
-];
 
 const MobileNav = () => {
   const router = useRouter();
+  const { currentUser } = useStateContext();
   const [searchState, setSearchState] = useState<string>("");
   const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
   
-  const onSignOut = async() =>{
+  const RouteSidebar_1 = [
+    {
+      id: 1,
+      icon: HomeIcon,
+      name: "Home",
+      href: "/",
+    },
+    {
+      id: 2,
+      icon: BookmarkIcon,
+      name: "Wishlist",
+      href: `/wishlist?userId=${currentUser?.uid!}`,
+    },
+    {
+      id: 3,
+      icon: NewspaperIcon,
+      name: "Reviews",
+      href: "/review?page=1",
+    },
+  ];
+
+  const onSignOut = async () => {
     await signOut(auth);
-    router.replace("/sign-in")
-  }
+    router.replace("/sign-in");
+  };
   const handleSubmit = (query: string) => {
     setIsSheetOpen(false);
     setSearchState("");
@@ -108,10 +112,16 @@ const MobileNav = () => {
             <UserIcon className="w-7 h-7" />
             <div className="text-[17px]">Account</div>
           </Link>
-          <div className="flex items-center gap-4 font-[family-name:var(--font-gilroy-medium)]" onClick={onSignOut}>
+          <div
+            className="flex items-center gap-4 font-[family-name:var(--font-gilroy-medium)]"
+            onClick={onSignOut}
+          >
             <LogOutIcon className="w-7 h-7" />
             <div className="text-[17px]">Logout</div>
           </div>
+        </div>
+        <div className="absolute bottom-8 right-8">
+          <ModeToggle />
         </div>
       </SheetContent>
     </Sheet>

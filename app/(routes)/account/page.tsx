@@ -4,9 +4,15 @@ import toast from "react-hot-toast";
 import Image from "next/image";
 import SliderNav from "@/components/Home/SliderNav";
 import { useStateContext } from "@/GlobalContext/ContextProvider";
-import { FolderClosedIcon, PenLine, Trash2Icon, User2Icon } from "lucide-react";
+import {
+  FolderClosedIcon,
+  LogOutIcon,
+  PenLine,
+  Trash2Icon,
+  User2Icon,
+} from "lucide-react";
 import { uploadImageToFirebase } from "@/lib/firebaseMethods";
-import { updateProfile } from "firebase/auth";
+import { signOut, updateProfile } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { AnimeList } from "@prisma/client";
 import axios from "axios";
@@ -19,6 +25,8 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/methods";
 import { AddtoListColors } from "../details/[animeId]/_components/AnimeDetails";
+import Link from "next/link";
+import { auth } from "@/firebase/firebase";
 
 const AccountsPage = () => {
   const router = useRouter();
@@ -80,48 +88,63 @@ const AccountsPage = () => {
         getAnimeListDetails();
       });
   };
+
+  const onSignOut = async () => {
+    await signOut(auth);
+    router.replace("/sign-in");
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div className="w-1/2 max-lg:w-full p-6">
         <div>
           <SliderNav title="Account" icon={User2Icon} />
-          <div className="flex gap-x-4 my-4">
-            <div className="relative flex justify-center items-center w-[100px] h-[100px] rounded-[50%]">
-              <Image
-                src={currentUser?.photoURL!}
-                alt="pfp"
-                width={100}
-                height={100}
-                className="w-[100px] h-[100px] rounded-[50%] object-cover"
-              />
-              <input
-                type="file"
-                id="profileImage"
-                accept="image/*"
-                className="hidden"
-                onChange={(e) => {
-                  toast.promise(updateProfilePic(e), {
-                    loading: "Updating Profile Pic...",
-                    success: "Profile Pic Updated ✅",
-                    error: "Error Updating Profile Pic ❌",
-                  });
-                }}
-              />
-              <label
-                htmlFor="profileImage"
-                className="absolute bottom-0 right-0 outline-none rounded-[50%] p-1 bg-slate-200 cursor-pointer"
-              >
-                <PenLine className="text-red-500 w-4 h-4" />
-              </label>
-            </div>
-            <div className="flex flex-col gap-2 mt-4 ">
-              <div className="text-red-600  text-2xl font-[family-name:var(--font-gilroy-bold)]">
-                {currentUser?.displayName}
+          <div className="flex justify-between items-center mx-5">
+            <div className="flex gap-x-4 my-4">
+              <div className="relative flex justify-center items-center w-[100px] h-[100px] rounded-[50%]">
+                <Image
+                  src={currentUser?.photoURL!}
+                  alt="pfp"
+                  width={100}
+                  height={100}
+                  className="w-[100px] h-[100px] rounded-[50%] object-cover"
+                />
+                <input
+                  type="file"
+                  id="profileImage"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    toast.promise(updateProfilePic(e), {
+                      loading: "Updating Profile Pic...",
+                      success: "Profile Pic Updated ✅",
+                      error: "Error Updating Profile Pic ❌",
+                    });
+                  }}
+                />
+                <label
+                  htmlFor="profileImage"
+                  className="absolute bottom-0 right-0 outline-none rounded-[50%] p-1 bg-slate-200 cursor-pointer"
+                >
+                  <PenLine className="text-red-500 w-4 h-4" />
+                </label>
               </div>
-              <div className="font-[family-name:var(--font-gilroy-medium)] ">
-                {currentUser?.email}
+              <div className="flex flex-col gap-2 mt-4 ">
+                <div className="text-red-600  text-2xl font-[family-name:var(--font-gilroy-bold)]">
+                  {currentUser?.displayName}
+                </div>
+                <div className="font-[family-name:var(--font-gilroy-medium)] ">
+                  {currentUser?.email}
+                </div>
               </div>
             </div>
+            <button
+              className="border border-red-600 dark:border-white dark:text-white rounded-lg text-red-600 p-4 flex items-center gap-2"
+              onClick={onSignOut}
+            >
+              <LogOutIcon />
+              Logout
+            </button>
           </div>
         </div>
         <div>
