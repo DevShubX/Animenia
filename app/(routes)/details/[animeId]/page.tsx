@@ -11,7 +11,7 @@ const AnimeDetailsPage = async ({
   searchParams: { [key: string] : string | undefined }
 }) => {
   const response = await axios.get(
-    `http://localhost:3000/api/animeDetails?id=${params.animeId}`
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/animeDetails?id=${params.animeId}`
   );
   
   const anilistId = response.data.result.anilistResponse.id;

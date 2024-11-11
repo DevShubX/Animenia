@@ -11,10 +11,10 @@ const AnimeWatchPage = async ({
 }) => {
   
   const response = await axios.get(
-    `http://localhost:3000/api/animeEpisodeLinks?episodeId=${params.episodeId}`
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/animeEpisodeLinks?episodeId=${params.episodeId}`
   );
 
-  const response_2 = await axios.get(`http://localhost:3000/api/animeDetails?id=${searchParams?.animeId}`)
+  const response_2 = await axios.get(`${process.env.NEXT_PUBLIC_APP_URL}/api/animeDetails?id=${searchParams?.animeId}`)
   console.log(response.data.result)
 
   return (
