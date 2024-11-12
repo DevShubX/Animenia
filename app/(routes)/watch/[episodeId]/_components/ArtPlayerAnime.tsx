@@ -12,7 +12,7 @@ const ArtPlayerAnime = ({sources} : ArtPlayerAnimeProps) => {
     let reverseSources = [...sources.sources].reverse()
     reverseSources = reverseSources.filter((item) => item.quality !== 'default')
 
-    const src = `${reverseSources[0].url}`
+    const src = `https://animenia-cors.mugdha6123.workers.dev/${reverseSources[0].url}`
     const artRef = useRef<any>()
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const ArtPlayerAnime = ({sources} : ArtPlayerAnimeProps) => {
             quality:reverseSources.map((item:any) => {
                 const container:any = {};
                 container['html'] = item.quality;
-                container['url'] = `${item.url}`;
+                container['url'] = `https://animenia-cors.mugdha6123.workers.dev/${item.url}`;
                 return container;
             }),
             customType: {

@@ -15,7 +15,6 @@ const AnimeWatchPage = async ({
   );
 
   const response_2 = await axios.get(`${process.env.NEXT_PUBLIC_APP_URL}/api/animeDetails?id=${searchParams?.animeId}`)
-  console.log(response.data.result)
 
   return (
     <div>
