@@ -138,7 +138,7 @@ const AccountsPage = () => {
               </div>
             </div>
             <button
-              className="border border-red-600 dark:border-white dark:text-white rounded-lg text-red-600 p-4 flex items-center gap-2"
+              className="border border-red-600 dark:border-white dark:text-white rounded-lg text-red-600 p-4 flex items-center gap-2 max-sm:hidden"
               onClick={onSignOut}
             >
               <LogOutIcon />
@@ -150,8 +150,8 @@ const AccountsPage = () => {
           <SliderNav title="Anime List" icon={FolderClosedIcon} />
           <div>
             {animeList.map((item,index) => (
-              <div key={index} className="flex bg-white dark:bg-[#363636] my-3 p-2 rounded-lg justify-between ">
-                <div className="flex items-start">
+              <div key={index} className="flex max-sm:flex-col bg-white dark:bg-[#363636] my-3 p-2 rounded-lg justify-between ">
+                <div className="flex items-start ">
                   <Image
                     src={(item.coverImage as any)["large"]!}
                     alt="Image"
@@ -172,14 +172,14 @@ const AccountsPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-x-4">
+                <div className="flex items-center gap-x-4 max-sm:justify-between">
                   <Select
                     value={item.status}
                     onValueChange={(status) => updateAnimeStatus(status, item)}
                   >
                     <SelectTrigger
                       className={cn(
-                        "w-min border-none outline-none ring-0 focus:ring-0 shadow-none font-[family-name:var(--font-gilroy-medium)] text-red-600 ",
+                        "w-min border-none outline-none ring-0 focus:ring-0 shadow-none font-[family-name:var(--font-gilroy-medium)] text-red-600",
                         AddtoListColors[item.status]
                       )}
                     >
@@ -208,7 +208,7 @@ const AccountsPage = () => {
                   </Select>
                   <div
                     onClick={() => deleteAnimeList(item)}
-                    className="bg-red-300 dark:bg-[#606060] w-full h-full p-6 rounded-lg flex items-center cursor-pointer"
+                    className="w-min bg-red-300 dark:bg-[#606060] h-full p-6 rounded-lg flex items-center cursor-pointer"
                   >
                     <Trash2Icon className="text-red-600 dark:text-white" />
                   </div>
