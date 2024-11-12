@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SliderNav from "@/components/Home/SliderNav";
 import { ArrowBigLeftDashIcon, ArrowBigRightDashIcon, ImageIcon } from "lucide-react";
@@ -30,7 +30,6 @@ const PopularPage = () => {
   };
 
   return (
-    <Suspense>
       <div className="p-6">
         <SliderNav title="Popular Anime" icon={ImageIcon} />
         {isLoading && <SearchSkeleton />}
@@ -71,7 +70,6 @@ const PopularPage = () => {
           </div>
         </div>
       </div>
-    </Suspense>
   );
 };
 
