@@ -38,10 +38,10 @@ const AnimeReviewPage = () => {
       {isLoading && <ReviewSkeleton />}
       {!isLoading && (
         <div className="grid grid-cols-5 gap-8 my-5 max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
-          {reviewAnime.map((item: any) => (
-            <Link href={`review/${item.id}`}>
+          {reviewAnime.map((item: any, index: number) => (
+            <Link key={index} href={`review/${item.id}`}>
               <Image
-                src={item?.media?.bannerImage ?? '/static/noImage.jfif'} 
+                src={item?.media?.bannerImage ?? "/static/noImage.jfif"}
                 alt="Review"
                 width={1000}
                 height={1000}
@@ -50,9 +50,12 @@ const AnimeReviewPage = () => {
               <div className="dark:bg-[#333333] bg-white p-3 h-[100px] font-[family-name:var(--font-gilroy-medium)]">
                 <div className="text-red-600 text-[17px] break-words truncate">
                   <span>Review of </span>
-                  {item.media?.title?.romaji ?? item.media?.title?.userPreferred}
+                  {item.media?.title?.romaji ??
+                    item.media?.title?.userPreferred}
                 </div>
-                <div className="dark:text-gray-400 text-gray-500 line-clamp-2">{item?.summary}</div>
+                <div className="dark:text-gray-400 text-gray-500 line-clamp-2">
+                  {item?.summary}
+                </div>
               </div>
             </Link>
           ))}

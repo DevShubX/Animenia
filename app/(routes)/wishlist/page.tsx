@@ -1,6 +1,6 @@
 import SliderNav from "@/components/Home/SliderNav";
 import { db } from "@/lib/db";
-import { Bookmark, Divide } from "lucide-react";
+import { Bookmark } from "lucide-react";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,8 +27,8 @@ const WishlistPage = async ({
       )}
       {wishlist.length > 0 && (
         <div className="grid grid-cols-7 gap-y-7 gap-x-5 mt-5 max-2xl:grid-cols-6 max-xl:grid-cols-5 max-lg:grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-2">
-          {wishlist.map((item) => (
-            <Link href={`/details/${item.animeId}?userId=${item.userId}`}>
+          {wishlist.map((item,index) => (
+            <Link key={index} href={`/details/${item.animeId}?userId=${item.userId}`}>
               <Image
                 className="h-[300px] rounded-[10px] object-cover max-md:h-[210px] max-md:w-[160px]"
                 src={(item.coverImage as any).large}

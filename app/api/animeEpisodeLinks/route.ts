@@ -9,9 +9,9 @@ const iframeLink = (episodeId:string) =>
 
 
 export async function GET(req:NextRequest){
+    const epiId = req.nextUrl.searchParams.get("episodeId")!
     try{
-        const epiId = req.nextUrl.searchParams.get("episodeId")!
-        let episodeId = `${url}/${epiId}`
+        const episodeId = `${url}/${epiId}`
         let sources:any = {}
 
         sources = await scrapeSourceFiles(epiId)
@@ -56,13 +56,13 @@ export async function GET(req:NextRequest){
             }
         })
 
-        let numOfEpisodes:number = parseInt($("#episode_page li:last-child a").attr("ep_end")!)
-        let baseEpisodeLink = epiId.replace(/\d+$/,"")
-        let episodes = []
+        const numOfEpisodes:number = parseInt($("#episode_page li:last-child a").attr("ep_end")!)
+        const baseEpisodeLink = epiId.replace(/\d+$/,"")
+        const episodes = []
         for (let i = 1; i <= numOfEpisodes; i++){
             episodes.push(baseEpisodeLink + i)
         }
-        let titleName = $(".title_name h2").text()
+        const titleName = $(".title_name h2").text()
         const comments = iframeLink(epiId.substring(1))
 
         result={

@@ -15,11 +15,10 @@ const AnimeWatchPage = async ({
   );
 
   const response_2 = await axios.get(`${process.env.NEXT_PUBLIC_APP_URL}/api/animeDetails?id=${searchParams?.animeId}`)
-  console.log(response.data.result)
 
   return (
     <div>
-      <AnimeWatch data={response.data.result} anilistData={response_2.data.result.anilistResponse} gogoData={response_2.data.result.gogoResponse} animeId={searchParams?.animeId!} />
+      <AnimeWatch data={response.data.result} anilistData={response_2.data.result.anilistResponse} animeId={searchParams?.animeId!} />
     </div>
   );
 };

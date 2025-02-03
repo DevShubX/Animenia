@@ -33,7 +33,7 @@ const ReleasingAnime = () => {
         <div>Loading...</div>
       ) : (
         releasingAnime?.slice(0, 5)?.map((item, index) => (
-          <div className="max-sm:flex max-sm:justify-between max-sm:p-2">
+          <div key={index} className="max-sm:flex max-sm:justify-between max-sm:p-2">
             <div>
               <div className="flex dark:text-white text-red-500 font-[family-name:var(--font-gilroy-bold)] gap-x-3 mt-6 max-sm:mt-2">
                 <div>{item.title.romaji ?? item.title.userPreferred}</div>

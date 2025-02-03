@@ -9,9 +9,9 @@ const list_episodes_url = "https://ajax.gogocdn.net/ajax/load-list-episode";
 const anifyUrl = "https://api.anify.tv";
 
 export async function GET(req: NextRequest) {
+  const id = req.nextUrl.searchParams.get("id")!;
   try {
-    const id = req.nextUrl.searchParams.get("id")!;
-    let requestURL = `${url}/category/${id}`;
+    const requestURL = `${url}/category/${id}`;
     const animeId = id.replace("-dub", "").replace("-sub", ""); //Extracting AnimeId to be checked on AniList
     console.log(animeId);
 
@@ -19,11 +19,11 @@ export async function GET(req: NextRequest) {
     const { data } = await axios.get(requestURL);
     const $ = cheerio.load(data);   //cheerio.load(data) loads HTML content stored in "data" in cheerio
 
-    let title = $(".anime_info_body_bg").find("h1").text();
-    let image = $(".anime_info_body_bg").find("img[src]").attr("src");
+    const title = $(".anime_info_body_bg").find("h1").text();
+    const image = $(".anime_info_body_bg").find("img[src]").attr("src");
     let type, description, genre, released, status, otherName;
     const ep_start = $("#episode_page > li").first().find("a").attr("ep_start");
-    let numOfEpisodes = $("#episode_page li:last-child a").attr("ep_end");
+    const numOfEpisodes = $("#episode_page li:last-child a").attr("ep_end");
 
     $(".type").each((i, el) => {
       const $el = $(el);
@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
       }
     });
 
-    let episodes: any[] = [];
+    const episodes: any[] = [];
 
     const movie_id = $("#movie_id").attr("value");
     const alias = $("#alias_anime").attr("value");
@@ -82,7 +82,7 @@ export async function GET(req: NextRequest) {
       console.log("Error from getanime anilist api call", err);
     }
 
-    let anilistId = anilistResponse?.data?.data?.Media?.id;
+    const anilistId = anilistResponse?.data?.data?.Media?.id;
     let anifyData: any = {};
     let kitsuId = null;
     if (anilistId) {
@@ -100,7 +100,7 @@ export async function GET(req: NextRequest) {
     }
     const jikanResponse = await axios.get(`https://api.jikan.moe/v4/anime/${anilistResponse?.data?.data?.Media?.idMal}/reviews`)
 
-    let gogoResponse = {
+    const gogoResponse = {
       title,
       image,
       type,
@@ -115,7 +115,7 @@ export async function GET(req: NextRequest) {
 
     if (anilistResponse !== undefined) {
       const anilistData = anilistResponse.data.data.Media;
-      let anilist = {
+      const anilist = {
         id: anilistData.id,
         malId: anilistData.idMal,
         title: anilistData.title,

@@ -5,9 +5,9 @@ import { NextRequest, NextResponse } from "next/server";
 const baseUrl = "https://graphql.anilist.co";
 
 export async function GET(req: NextRequest) {
+  const page = req.nextUrl.searchParams.get("page")!; // Get info from URL's query parameter
+  const count = req.nextUrl.searchParams.get("count")!;
   try {
-    const page = req.nextUrl.searchParams.get("page")!; // Get info from URL's query parameter
-    const count = req.nextUrl.searchParams.get("count")!;
     const response:any = await axios({
       url: baseUrl,
       method: "POST",

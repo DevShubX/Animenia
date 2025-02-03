@@ -28,7 +28,6 @@ import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
 import { WishList } from "@prisma/client";
 
 interface AnimeDetailProps {
-  gogoData: any;
   anilistData: any;
   animeId: string;
   status: string;
@@ -43,7 +42,6 @@ export const AddtoListColors: any = {
 };
 
 const AnimeDetails = ({
-  gogoData,
   anilistData,
   animeId,
   status,
@@ -94,9 +92,7 @@ const AnimeDetails = ({
         loading: "Updating Wishlist",
         error: "Error Updating Wishlist",
       });
-      
-    }
-    else{
+    } else {
       const addPromise = axios.post("/api/anime/wishList/add", animeData);
       toast.promise(addPromise, {
         success: "Wishlist Updated",
@@ -221,7 +217,6 @@ const AnimeDetails = ({
         <div>
           <EpisodeSection
             anilistData={anilistData}
-            gogoData={gogoData}
             animeId={animeId}
           />
         </div>
@@ -230,8 +225,11 @@ const AnimeDetails = ({
             Characters
           </div>
           <div className="flex items-center overflow-scroll gap-x-4">
-            {anilistData.characters.edges.map((item: any) => (
-              <div className="flex-shrink-0 text-center font-[family-name:var(--font-gilroy-medium)]">
+            {anilistData.characters.edges.map((item: any, index: any) => (
+              <div
+                key={index}
+                className="flex-shrink-0 text-center font-[family-name:var(--font-gilroy-medium)]"
+              >
                 <Image
                   src={item.node.image.large}
                   alt="role"
@@ -252,8 +250,9 @@ const AnimeDetails = ({
             Recommendations
           </div>
           <div className="flex overflow-scroll gap-x-5 mt-2">
-            {anilistData.recommendations.edges.map((item: any) => (
+            {anilistData.recommendations.edges.map((item: any, index: any) => (
               <Link
+                key={index}
                 href={`/search?q=${
                   item.node.mediaRecommendation.title.romaji ??
                   item.node.mediaRecommendation.title.userpreferred
@@ -280,8 +279,8 @@ const AnimeDetails = ({
         <div>
           <SliderNav icon={LinkIcon} title="External Links" />
           <div>
-            {anilistData?.externalLinks?.map((item: any) => (
-              <Link href={item?.url} target="_blank">
+            {anilistData?.externalLinks?.map((item: any, index: any) => (
+              <Link key={index} href={item?.url} target="_blank">
                 <div className="flex items-center gap-x-3 dark:bg-[#333333] dark:hover:bg-gray-500 bg-white my-3 p-[6px] rounded-md hover:bg-slate-300">
                   {item.icon ? (
                     <div
@@ -311,8 +310,9 @@ const AnimeDetails = ({
         <div>
           <SliderNav icon={ScrollText} title="Review" />
           <div className="flex flex-col gap-y-3 mt-4">
-            {anilistData.malReviews.slice(0, 5).map((item: any) => (
+            {anilistData.malReviews.slice(0, 5).map((item: any, index: any) => (
               <Link
+                key={index}
                 href={item.url}
                 target="_blank"
                 className="w-full dark:bg-[#333333] dark:hover:bg-gray-500 bg-white cursor-pointer rounded-md p-2 font-[family-name:var(--font-gilroy-medium)]"

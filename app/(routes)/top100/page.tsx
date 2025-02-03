@@ -13,25 +13,23 @@ import { useSearchParams } from "next/navigation";
 import SearchSkeleton from "@/components/Skeletons/SearchSkeleton";
 
 const Top100AnimePage = () => {
-    const [top100Anime, setTop100Anime] = useState<any[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [pageInfo, setPageInfo] = useState<any>({});
-  
-    const page = parseInt(useSearchParams().get("page")!);
-  
-    useEffect(() => {
-      getTop100Anime();
-    }, [page]);
-  
-    const getTop100Anime = async () => {
-      setIsLoading(true);
-      const response = await axios.get(
-        `/api/anime/top100?page=${page}&count=20`
-      );
-      setTop100Anime(response.data.result.data.Page.media);
-      setPageInfo(response.data.result.data.Page.pageInfo);
-      setIsLoading(false);
-    };
+  const [top100Anime, setTop100Anime] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [pageInfo, setPageInfo] = useState<any>({});
+
+  const page = parseInt(useSearchParams().get("page")!);
+
+  useEffect(() => {
+    getTop100Anime();
+  }, [page]);
+
+  const getTop100Anime = async () => {
+    setIsLoading(true);
+    const response = await axios.get(`/api/anime/top100?page=${page}&count=20`);
+    setTop100Anime(response.data.result.data.Page.media);
+    setPageInfo(response.data.result.data.Page.pageInfo);
+    setIsLoading(false);
+  };
 
   return (
     <div className="p-6">
@@ -39,8 +37,13 @@ const Top100AnimePage = () => {
       {isLoading && <SearchSkeleton />}
       {!isLoading && (
         <div className="grid grid-cols-7 max-xl:grid-cols-6 max-lg:grid-cols-5 max-md:grid-cols-4 max-sm:grid-cols-3 max-[400px]:grid-cols-2 gap-5 mt-5">
-          {top100Anime.map((item) => (
-            <Link href={`/search?q=${item.title.romaji ?? item.title.userPreferred}`}>
+          {top100Anime.map((item, index) => (
+            <Link
+              key={index}
+              href={`/search?q=${
+                item.title.romaji ?? item.title.userPreferred
+              }`}
+            >
               <Image
                 src={item.coverImage.large}
                 alt="top100"
@@ -55,26 +58,22 @@ const Top100AnimePage = () => {
           ))}
         </div>
       )}
-      <hr className="bg-gray-400 h-[2px] my-5"/>
+      <hr className="bg-gray-400 h-[2px] my-5" />
       <div className="flex justify-between items-center mt-5 font-[family-name:var(--font-gilroy-bold)]">
         <div className="bg-red-600 text-white px-4 py-2 rounded-md flex gap-x-2">
           <ArrowBigLeftDashIcon />
-          <Link href={`/top100?page=${page > 1 ? page - 1 : page}`}>
-            Prev
-          </Link>
+          <Link href={`/top100?page=${page > 1 ? page - 1 : page}`}>Prev</Link>
         </div>
         <div className="font-[family-name:var(--font-gilroy-medium)] dark:bg-black bg-white px-4 py-2 rounded-md">
           {page} OF {pageInfo.lastPage}
         </div>
         <div className="bg-red-600 text-white px-4 py-2 rounded-md flex gap-x-2">
-          <Link href={`/top100?page=${page + 1}`}>
-            Next
-          </Link>
+          <Link href={`/top100?page=${page + 1}`}>Next</Link>
           <ArrowBigRightDashIcon />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Top100AnimePage
+export default Top100AnimePage;

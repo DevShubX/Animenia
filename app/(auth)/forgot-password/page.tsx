@@ -20,7 +20,7 @@ const ForgotPasswordPage = () => {
         await sendPasswordResetEmail(auth, email).then(() => {
         toast.success("Reset Email Send Succesfully");
     });
-    }catch(err){
+    }catch{
         toast.error("Something Went Wrong");
     }finally{
         setIsLoading(false);
@@ -39,7 +39,7 @@ const ForgotPasswordPage = () => {
         Forgot Password
       </h1>
       <div className="text-center font-[family-name:var(--font-gilroy-medium)]">
-        Enter your email and we'll send you a link to reset your password
+        Enter your email and we&apos;ll send you a link to reset your password
       </div>
       <div className="bg-white w-full flex items-center p-2 border rounded-lg space-x-2 mt-8">
         <span>

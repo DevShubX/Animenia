@@ -10,7 +10,7 @@ import { Image } from "lucide-react";
 
 const FavoriteAnimeSlider = () => {
 
-    const [favoriteAnime , setFavoriteAnime] = useState<any[]>([]);
+    const [favoriteAnime , setFavoriteAnime] = useState<object[]>([]);
     const [isLoading , setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {

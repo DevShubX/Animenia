@@ -26,8 +26,8 @@ const ReviewAnime = () => {
       {isLoading ? (
         <div>Loading.....</div>
       ) : (
-        reviewAnime?.map((item) => (
-          <Link href={`/review/${item.id}`} className="relative font-[family-name:var(--font-gilroy-medium)]">
+        reviewAnime?.map((item,index) => (
+          <Link key={index} href={`/review/${item.id}`} className="relative font-[family-name:var(--font-gilroy-medium)]">
             <Image
               className=" w-full h-[150px] my-4 rounded-[10px] object-cover cursor-pointer"
               src={item.media.bannerImage ?? "/static/noImage.jfif"}

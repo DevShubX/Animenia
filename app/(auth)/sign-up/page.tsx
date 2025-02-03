@@ -19,8 +19,8 @@ import { Loader2 } from "lucide-react";
 const SignUpPage = () => {
 
   const router = useRouter();
-  const [photoUrl, setPhotoUrl] = useState<any>(null);
-  const [selectedPhoto, setSelectedPhoto] = useState<any>("");
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [selectedPhoto, setSelectedPhoto] = useState<File | null>(null);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -33,7 +33,7 @@ const SignUpPage = () => {
       if (email && password) {
         setIsLoading(true);
         const user = await createUserWithEmailAndPassword(auth, email, password);
-        const photoURL = await uploadImageToFirebase(selectedPhoto);
+        const photoURL = await uploadImageToFirebase(selectedPhoto!);
         if (name && photoURL) {
           await updateProfile(user.user, {
             displayName: name,
@@ -44,7 +44,7 @@ const SignUpPage = () => {
           });
         }
       }
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
@@ -84,8 +84,8 @@ const SignUpPage = () => {
           id="profileImage"
           accept="image/*"
           className="hidden"
-          onChange={(e: any) => {
-            setSelectedPhoto(e.target.files[0])
+          onChange={(e) => {
+            setSelectedPhoto(e.target.files![0])
           }}
         />
         <label htmlFor='profileImage' className="relative flex justify-center items-center w-full">
@@ -101,7 +101,7 @@ const SignUpPage = () => {
                 className="absolute bottom-0 right-0 outline-none rounded-[50%] p-1 bg-slate-200"
                 onClick={() => {
                   setPhotoUrl(null)
-                  setSelectedPhoto('')
+                  setSelectedPhoto(null)
                 }}
               >
                 <MdDelete className="text-red-500 w-4 h-4" />
